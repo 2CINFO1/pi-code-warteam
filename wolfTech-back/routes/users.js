@@ -4,6 +4,7 @@ const User = require("../model/user");
 var bcrypt = require('bcryptjs');
 var jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
+const role = require('../model/role');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -102,5 +103,19 @@ router.post("/login", async (req, res) => {
 router.post("/welcome", auth, (req, res) => {
   res.status(200).send("Welcome 🙌 ");
 });
+
+/* add role. */
+router.post('/addRole', function(req, res, next) {
+   
+  let role = role.create(req.body);
+  res.json(role);
+});
+
+/* update role. */
+router.get('/updateRole/:_id', async (req, res) => {
+  let role =  await role.findById(req.params);
+
+  res.json(role)
+})
 
 module.exports = router;
