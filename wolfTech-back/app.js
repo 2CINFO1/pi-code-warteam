@@ -12,6 +12,7 @@ var projetsRouter = require('./routes/projet');
 var tachesRouter = require('./routes/tache');
 var commentairesRouter = require('./routes/commentaire');
 var reponsesRouter = require('./routes/reponse');
+var rolesRouter = require('./routes/role');
 
 var app = express();
 var mongoose = require('mongoose')
@@ -40,6 +41,7 @@ app.use('/projets', projetsRouter);
 app.use('/taches', tachesRouter);
 app.use('/commentaires', commentairesRouter);
 app.use('/reponses', reponsesRouter);
+app.use('/roles', rolesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
