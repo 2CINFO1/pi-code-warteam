@@ -3,6 +3,10 @@ var express = require('express');
 const commentaire = require('../model/commentaire');
 const Reponse = require('../model/reponse');
 var router = express.Router();
+const bodyParser = require('body-parser');
+const { check, validationResult } = require('express-validator');
+const app = express();
+app.use(bodyParser.json());
 //liste des commentaire
 router.get('/', function(req, res){
     Commentaire.find(function (err, data){
@@ -13,7 +17,15 @@ router.get('/', function(req, res){
 });
 
 //Ajouter commentaire 
-    router.post('/add', async (req, res) => {
+    router.post('/add', [
+        check('TextC').isString(),
+        check('TextC').isLength({ min: 5 })
+      ], async (req, res) => {
+        const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    res.send('comment saved');
         let rep = await Reponse.findById(req.body.Reponse)
         var c = new Commentaire ({
             textC : req.body.TextC,
@@ -39,5 +51,15 @@ router.post('/update/:_id', async(req, res) => {
     commentaire.save()
     res.json(commentaire)
 })
-
+/*app.post('/commentaires', [
+    check('TextC').isString(),
+    check('TextC').isLength({ min: 5 })
+  ], (req, res) => {
+    const errors = validationResult(req);
+    if (!errors.isEmpty()) {
+      return res.status(422).json({ errors: errors.array() });
+    }
+    res.send('comment saved');
+  });
+  //app.listen(3000, () => console.log('server started'));*/
 module.exports = router
