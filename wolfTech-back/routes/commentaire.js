@@ -13,10 +13,8 @@ router.get('/', function(req, res){
 
 //Ajouter commentaire 
 router.post('/add', function(req, res){
-    console.log(req.body)
     var c = new Commentaire ({
         textC : req.body.textC
-
     });
     c.save();
     res.json(c)
@@ -29,11 +27,11 @@ router.get('/delete/:_id', async(req, res) => {
 });
 router.get('/afficher', async(req, res) => {
     let commentaire = await Commentaire.find();
-
     res.json(commentaire)
 });
 router.post('/update/:_id', async(req, res) => {
     let commentaire = await Commentaire.findById(req.params);
+    console.log('tesdt ', commentaire);
     commentaire.textC = req.body.textC
     commentaire.save()
     res.json(commentaire)
