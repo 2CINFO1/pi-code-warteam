@@ -59,4 +59,14 @@ router.post('/update/:_id', async (req, res) => {
     }
 })
 
+router.post('/actions/:_id', async (req, res) => {
+    try {
+        let status = req.body.action
+        let demande = await Demande.findByIdAndUpdate(req.params, {status: status})
+        res.status(200).json(demande);
+    } catch (error) {
+        res.status(400).json(error.message);   
+    }
+})
+
 module.exports = router;
