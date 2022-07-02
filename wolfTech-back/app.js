@@ -6,11 +6,12 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
-
+var projetsRouter = require('./routes/projet');
+var tachesRouter = require('./routes/tache');
 var app = express();
 var mongoose = require('mongoose')
 
-mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', {useNewUrlParser: true, useUnifiedTopology: true}, () => {
+mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}, () => {
   console.log('Connected dataBase');
 })
 
@@ -26,7 +27,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/projets', projetsRouter);
+app.use('/taches', tachesRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
