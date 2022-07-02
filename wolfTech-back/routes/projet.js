@@ -3,7 +3,9 @@ var router = express.Router();
 var Projet = require('../model/Projet');
 var multer = require('multer');
 var path = require('path');
-
+const bodyParser = require('body-parser');
+const { check, validationResult } = require('express-validator'); const app = express();
+app.use(bodyParser.json());
 router.get('/', function (req, res) {
     Projet.find((err, data) => {
 
@@ -45,7 +47,21 @@ var storage = multer.diskStorage({
 });
 let upload = multer({ storage });
 
-router.post('/add', upload.single('file'), function (req, res) {
+router.post('/add', 
+
+[
+    check('Description').isString(),
+    check('Description').isLength({ min: 5 })
+],
+    async (req, res) => {
+        const errors = validationResult(req);
+        if (!errors.isEmpty()) {
+            return res.status(422).json({ errors: errors.array() });
+        }
+        res.send('Projet enrigister ');
+
+    },
+upload.single('file'), function (req, res) {
 
 
     var P = new Projet({

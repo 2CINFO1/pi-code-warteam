@@ -8,7 +8,15 @@ Description   : String,
 Date_Debut : Date,
 Date_Fin : Date,
 Etat : String,
-Projet : String
+Projet:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'projets'
+},
+User:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'users'
+}
+
 }
 
 
