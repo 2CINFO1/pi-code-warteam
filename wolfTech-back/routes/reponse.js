@@ -1,6 +1,7 @@
 var Reponse = require('../model/reponse');
 var express = require('express');
 const reponse = require('../model/reponse');
+const commentaire = require('../model/commentaire');
 var router = express.Router();
 //liste des reponse
 router.get('/', function(req, res){
@@ -12,9 +13,11 @@ router.get('/', function(req, res){
 });
 
 //Ajouter reponse 
-router.post('/add', function(req, res){
+router.post('/add', async (req, res) => {
+    let comment = await commentaire.findById(req.body.commentaire)
     var c = new Reponse ({
-        textR : req.body.textR
+        textR : req.body.textR,
+        commentaire: comment
     });
     c.save();
     res.json(c)
