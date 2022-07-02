@@ -4,11 +4,11 @@ var Schema = mongoose.Schema;
  var Commentaire = new Schema({
 textC :  String,
 created_at    : { type: Date, required: true, default: Date.now },
-reponse:{
+reponse:[{
     type: mongoose.Schema.ObjectId,
     ref: 'reponses',
     required: false
-}
+}]
 });
 
    

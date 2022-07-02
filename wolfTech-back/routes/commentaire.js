@@ -3,6 +3,8 @@ var express = require('express');
 const commentaire = require('../model/commentaire');
 const Reponse = require('../model/reponse');
 var router = express.Router();
+var multer = require('multer');
+var path = require('path');
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 const app = express();
@@ -15,7 +17,16 @@ router.get('/', function(req, res){
         res.json(data);
     });
 });
-
+//upload file en comment
+var storage = multer.diskStorage({
+    destination: function (req, file, callback) {
+        callback(null, path.join(__dirname + '/uploads/'));
+    },
+    filename: function (req, file, callback) {
+        callback(null, file.fieldname + '-' + Date.now());
+    }
+});
+let upload = multer({ storage });
 //Ajouter commentaire 
     router.post('/add', [
         check('TextC').isString(),
