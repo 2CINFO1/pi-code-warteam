@@ -6,8 +6,14 @@ var logger = require('morgan');
 
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+var demandesRouter = require('./routes/demandes');
+var reviewsRouter = require('./routes/reviews');
 var projetsRouter = require('./routes/projet');
 var tachesRouter = require('./routes/tache');
+var commentairesRouter = require('./routes/commentaire');
+var reponsesRouter = require('./routes/reponse');
+var rolesRouter = require('./routes/role');
+
 var app = express();
 var mongoose = require('mongoose')
 
@@ -24,11 +30,19 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+var dirProjets = path.join(__dirname, 'routes/projets');
+app.use(express.static(dirProjets));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/demandes', demandesRouter);
+app.use('/reviews', reviewsRouter);
 app.use('/projets', projetsRouter);
 app.use('/taches', tachesRouter);
+app.use('/commentaires', commentairesRouter);
+app.use('/reponses', reponsesRouter);
+app.use('/roles', rolesRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
   next(createError(404));
