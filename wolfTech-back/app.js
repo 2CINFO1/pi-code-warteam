@@ -10,6 +10,8 @@ var demandesRouter = require('./routes/demandes');
 var reviewsRouter = require('./routes/reviews');
 var projetsRouter = require('./routes/projet');
 var tachesRouter = require('./routes/tache');
+var commentairesRouter = require('./routes/commentaire');
+var reponsesRouter = require('./routes/reponse');
 
 var app = express();
 var mongoose = require('mongoose')
@@ -36,6 +38,8 @@ app.use('/demandes', demandesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/projets', projetsRouter);
 app.use('/taches', tachesRouter);
+app.use('/commentaires', commentairesRouter);
+app.use('/reponses', reponsesRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
