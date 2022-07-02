@@ -5,4 +5,4 @@ const roleSchema = new mongoose.Schema({
   created_at: { type: Date, required: true, default: Date.now }
 });
 
-module.exports = mongoose.model("role", roleSchema);
+module.exports = mongoose.model("roles", roleSchema);

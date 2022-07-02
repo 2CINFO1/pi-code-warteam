@@ -4,7 +4,7 @@ const User = require("../model/user");
 var bcrypt = require('bcryptjs');
 var jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
-const role = require('../model/role');
+const Role = require('../model/role');
 
 /* GET users listing. */
 router.get('/', function(req, res, next) {
@@ -15,7 +15,7 @@ router.get('/', function(req, res, next) {
 router.post("/register", async (req, res) => {
   try {
     // Get user input
-    const { first_name, last_name, email, password } = req.body;
+    const { first_name, last_name, email, password, role } = req.body;
 
     // Validate user input
     if (!(email && password && first_name && last_name)) {
@@ -25,7 +25,6 @@ router.post("/register", async (req, res) => {
   // check if user already exist
   // Validate if user exist in our database
     const oldUser = await User.findOne({ email });
-    console.log(oldUser);
 
     if (oldUser) {
       return res.status(409).send("User Already Exist. Please Login");
@@ -33,10 +32,11 @@ router.post("/register", async (req, res) => {
 
    //Encrypt user password
     let encryptedPassword = await bcrypt.hash(password, 10);
-    console.log(encryptedPassword)
   //   // Create user in our database
+    roleUser = await Role.findOne({name: role})
     const user = await User.create({
       first_name,
+      role : roleUser,
       last_name,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
@@ -75,7 +75,7 @@ router.post("/login", async (req, res) => {
       res.status(400).send("All input is required");
     }
     // Validate if user exist in our database
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email }).populate('role')
 
     if (user && (await bcrypt.compare(password, user.password))) {
       // Create token
@@ -100,22 +100,12 @@ router.post("/login", async (req, res) => {
   // Our register logic ends here
 });
 
-router.post("/welcome", auth, (req, res) => {
-  res.status(200).send("Welcome 🙌 ");
+router.post("/current", auth, async (req, res) => {
+  try {
+    console.log(req.user);
+  } catch (error) {
+    
+  }
 });
-
-/* add role. */
-router.post('/addRole', function(req, res, next) {
-   
-  let role = role.create(req.body);
-  res.json(role);
-});
-
-/* update role. */
-router.get('/updateRole/:_id', async (req, res) => {
-  let role =  await role.findById(req.params);
-
-  res.json(role)
-})
 
 module.exports = router;
