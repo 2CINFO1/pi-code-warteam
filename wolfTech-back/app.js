@@ -7,6 +7,7 @@ var logger = require('morgan');
 var indexRouter = require('./routes/indexRoutes');
 var usersRouter = require('./routes/users');
 var congesRouter = require('./routes/congeRoutes');
+var primeRouter = require('./routes/primeRoutes')
 var dayplanRouter = require('./routes/dayplanRoutes');
 var primeRouter = require('./routes/primeRoutes');
 var demandesRouter = require('./routes/demandes');
@@ -39,7 +40,7 @@ app.use(express.static(dirProjets));
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/conges', congesRouter);
-app.use('/prime', primeRouter);
+app.use('/primes', primeRouter);
 app.use('/dayplan', dayplanRouter);
 app.use('/demandes', demandesRouter);
 app.use('/reviews', reviewsRouter);

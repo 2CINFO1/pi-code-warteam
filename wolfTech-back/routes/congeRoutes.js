@@ -1,18 +1,22 @@
 var express = require('express');
 var router = express.Router();
 var Conge = require('../model/conge');
+const auth = require("../middleware/auth");
 
 router.get('/display', async(req, res) => {
-    let conges = await Conge.find();
+    let conges = await Conge.find().populate('user');
 
     res.json(conges)
 });
 
 
 
-router.post('/add', async(req, res, next) => {
-    let conge = await Conge.create(req.body);
-    console.log(conge);
+router.post('/add', auth, async(req, res, next) => {
+    let conge = await Conge.create({
+        ...req.body,
+        user: req.user.user_id
+    });
+
     res.json(conge)
 });
 router.get('/delete/:_id', async(req, res) => {
@@ -20,11 +24,6 @@ router.get('/delete/:_id', async(req, res) => {
     res.json('delete success')
 
 });
-router.get('/update/:_id', async(req, res) => {
-    let conge = await Conge.findById(req.params);
-    console.log(prime);
-    res.json(conge)
-})
 
 router.post('/update/:_id', async(req, res) => {
     let conge = await Conge.updateOne(req.params, req.body);
