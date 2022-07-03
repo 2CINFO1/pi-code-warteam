@@ -9,10 +9,18 @@ var usersRouter = require('./routes/users');
 var congesRouter = require('./routes/congeRoutes');
 var dayplanRouter = require('./routes/dayplanRoutes');
 var primeRouter = require('./routes/primeRoutes');
+var demandesRouter = require('./routes/demandes');
+var reviewsRouter = require('./routes/reviews');
+var projetsRouter = require('./routes/projet');
+var tachesRouter = require('./routes/tache');
+var commentairesRouter = require('./routes/commentaire');
+var reponsesRouter = require('./routes/reponse');
+var rolesRouter = require('./routes/role');
+
 var app = express();
 var mongoose = require('mongoose')
 
-mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, () => {
     console.log('Connected dataBase');
 })
 
@@ -25,12 +33,22 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+var dirProjets = path.join(__dirname, 'routes/projets');
+app.use(express.static(dirProjets));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
 app.use('/conges', congesRouter);
 app.use('/prime', primeRouter);
 app.use('/dayplan', dayplanRouter);
+app.use('/demandes', demandesRouter);
+app.use('/reviews', reviewsRouter);
+app.use('/projets', projetsRouter);
+app.use('/taches', tachesRouter);
+app.use('/commentaires', commentairesRouter);
+app.use('/reponses', reponsesRouter);
+app.use('/roles', rolesRouter);
+
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
     next(createError(404));

@@ -6,6 +6,11 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: { type: String },
   token: { type: String },
+  role: {
+    type: mongoose.Schema.ObjectId,
+    ref:'roles' //le nom de la collection dans la bade de donnes 
+  }
+
 });
 
 module.exports = mongoose.model("user", userSchema);
