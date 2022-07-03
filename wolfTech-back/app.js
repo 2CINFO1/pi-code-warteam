@@ -4,14 +4,16 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
-var indexRouter = require('./routes/index');
+var indexRouter = require('./routes/indexRoutes');
 var usersRouter = require('./routes/users');
-
+var congesRouter = require('./routes/congeRoutes');
+var dayplanRouter = require('./routes/dayplanRoutes');
+var primeRouter = require('./routes/primeRoutes');
 var app = express();
 var mongoose = require('mongoose')
 
-mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', {useNewUrlParser: true, useUnifiedTopology: true}, () => {
-  console.log('Connected dataBase');
+mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', { useNewUrlParser: true, useUnifiedTopology: true }, () => {
+    console.log('Connected dataBase');
 })
 
 // view engine setup
@@ -26,21 +28,23 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
-
+app.use('/conges', congesRouter);
+app.use('/prime', primeRouter);
+app.use('/dayplan', dayplanRouter);
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
-  next(createError(404));
+    next(createError(404));
 });
 
 // error handler
 app.use(function(err, req, res, next) {
-  // set locals, only providing error in development
-  res.locals.message = err.message;
-  res.locals.error = req.app.get('env') === 'development' ? err : {};
+    // set locals, only providing error in development
+    res.locals.message = err.message;
+    res.locals.error = req.app.get('env') === 'development' ? err : {};
 
-  // render the error page
-  res.status(err.status || 500);
-  res.render('error');
+    // render the error page
+    res.status(err.status || 500);
+    res.render('error');
 });
 
 module.exports = app;
