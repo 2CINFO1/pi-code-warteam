@@ -7,6 +7,7 @@ const auth = require("../middleware/auth");
 const Role = require('../model/role');
 
 const nodemailer = require("nodemailer");
+const user = require('../model/user');
 const transporter = nodemailer.createTransport({
   port: 465, // true for 465, false for other ports
   host: "smtp.gmail.com",
@@ -125,7 +126,8 @@ router.post("/login", async (req, res) => {
     }
     // Validate if user exist in our database
     const user = await User.findOne({
-      email
+      email,
+      blocked: false
     }).populate('role')
 
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -156,6 +158,37 @@ router.post("/login", async (req, res) => {
 router.post("/current", auth, async (req, res) => {
   try {
     console.log(req.user);
+  } catch (error) {
+
+  }
+});
+
+router.post("/blocked", auth, async (req, res) => {
+  try {
+    let user = await User.findById(req.body.userId);
+    if (user) {
+      user.blocked = true;
+      user.save();
+      res.status(200).json("User Blocked");
+    }
+    res.status(200).json("User not existe");
+
+    
+    
+    
+  } catch (error) {
+
+  }
+});
+
+router.get("/display", async (req, res) => {
+  try {
+    let roleUser = await Role.findOne({
+      name: req.body.role
+    })
+    res.json({
+      user : await user.find({role: roleUser.id}).populate('role')
+    })
   } catch (error) {
 
   }

@@ -6,6 +6,7 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: { type: String },
   token: { type: String },
+  blocked:{type : Boolean, default : false},
   role: {
     type: mongoose.Schema.ObjectId,
     ref:'roles' //le nom de la collection dans la bade de donnes 
