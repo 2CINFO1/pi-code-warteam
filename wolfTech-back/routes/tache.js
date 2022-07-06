@@ -37,19 +37,45 @@ router.get('/delete/:_id', async(req, res) => {
 router.post('/add', async (req, res) => {
     try {
         let projet = await Projet.findById(req.body.Projet)
-        console.log(projet);
         var T = await Tache.create({
             Nom: req.body.Nom,
             Description: req.body.Description,
             Date_Debut: req.body.Date_Debut,
-            Date_Fin: req.body.Date_Fin,
-            Etat: req.body.Etat,
-            Projet : projet 
+            Date_Fin: req.body.Date_Fin
         });
+        projet.Taches.push(T)
+        projet.save()
         res.json(T)
     } catch (error) {
         res.json(error)
     }   
 });
+
+router.post('/affecter/:_id', async (req,res) =>{
+
+try {
+
+    let userId = req.body.userId
+    let tache = await Tache.findOne({User: userId, Etat: 'En cours'})
+    
+    if (tache ) {
+        res.status('400').json("User have Tasks")
+    }else {
+        let affectTache = await Tache.findById(req.params)
+        affectTache.User = userId;
+        affectTache.save();
+        res.json(affectTache)
+    }
+
+} catch (error) {
+    
+}
+
+
+
+})
+
+
+
 
 module.exports = router;

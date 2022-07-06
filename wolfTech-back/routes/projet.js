@@ -4,7 +4,8 @@ var Projet = require('../model/Projet');
 var multer = require('multer');
 var path = require('path');
 const bodyParser = require('body-parser');
-const { check, validationResult } = require('express-validator'); const app = express();
+const { check, validationResult } = require('express-validator');const { Router } = require('express');
+ const app = express();
 app.use(bodyParser.json());
 router.get('/', function (req, res) {
     Projet.find((err, data) => {
@@ -32,7 +33,12 @@ router.post('/update/:_id', async (req, res) => {
 
 
 router.get('/afficher', async (req, res) => {
-    let projet = await Projet.find();
+    let projet = await Projet.find().populate({
+        path : 'Taches',
+        populate : {
+          path : 'User'
+        }
+      });
 
     res.json(projet)
 });
@@ -49,18 +55,6 @@ let upload = multer({ storage });
 
 router.post('/add', 
 
-[
-    check('Description').isString(),
-    check('Description').isLength({ min: 5 })
-],
-    async (req, res) => {
-        const errors = validationResult(req);
-        if (!errors.isEmpty()) {
-            return res.status(422).json({ errors: errors.array() });
-        }
-        res.send('Projet enrigister ');
-
-    },
 upload.single('file'), function (req, res) {
 
 
@@ -71,6 +65,7 @@ upload.single('file'), function (req, res) {
         Date_Fin: req.body.Date_Fin,
         Etat: req.body.Etat,
         file: req.file.path
+        
     });
 
     P.save();
@@ -82,5 +77,21 @@ upload.single('file'), function (req, res) {
         res.end("File is uploaded");
     });
 });
+
+
+
+// Archive projet
+router.get('/archive/:id', (req, res, next) => {
+    var id = req.params.id;
+    Projet.archive((err) => {
+        if (err) {
+            res.json({ success: false, msg: 'Failed to archive projet' + err.message });
+        } else {
+            res.json({ success: true, msg: 'projet deleted' });
+        }
+    });
+})
+
+
 
 module.exports = router;
