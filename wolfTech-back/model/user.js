@@ -9,7 +9,14 @@ const userSchema = new mongoose.Schema({
   role: {
     type: mongoose.Schema.ObjectId,
     ref:'roles' //le nom de la collection dans la bade de donnes 
-  }
+  },
+  likes: [
+    { type: mongoose.Schema.Types.ObjectId, ref: 'likes' }
+],
+commentaire:{
+  type: mongoose.Schema.ObjectId,
+  ref: 'commentaires'
+}
 
 });
 
