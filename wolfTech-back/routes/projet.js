@@ -34,7 +34,10 @@ router.post('/update/:_id', async (req, res) => {
 
 
 router.get('/afficher', async (req, res) => {
-    let projet = await Projet.find().populate({
+    let query = {
+        isArchive: false
+    }
+    let projet = await Projet.find(query).populate({
         path: 'Taches',
         populate: {
             path: 'User'
@@ -81,16 +84,10 @@ router.post('/add',
 
 
 
-// Archive projet
-router.get('/archive/:id', (req, res, next) => {
-    var id = req.params.id;
-    Projet.archive((err) => {
-        if (err) {
-            res.json({ success: false, msg: 'Failed to archive projet' + err.message });
-        } else {
-            res.json({ success: true, msg: 'projet deleted' });
-        }
-    });
+
+router.get('/archive/:_id', async (req, res, next) => {
+    let projet = await Projet.findByIdAndUpdate(req.params, {isArchive : true})
+    res.json({ success: true, msg: 'projet archived' , projet : projet });
 })
 
 
