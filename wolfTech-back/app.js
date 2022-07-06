@@ -42,6 +42,8 @@ app.use('/taches', tachesRouter);
 app.use('/commentaires', commentairesRouter);
 app.use('/reponses', reponsesRouter);
 app.use('/roles', rolesRouter);
+app.use('/uploads', express.static('./uploads'));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
