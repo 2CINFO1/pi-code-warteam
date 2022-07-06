@@ -46,7 +46,17 @@ router.get('/afficher', async (req, res) => {
 
     res.json(projet)
 });
+router.get('/affichertout', async (req, res) => {
+   
+    let projet = await Projet.find().populate({
+        path: 'Taches',
+        populate: {
+            path: 'User'
+        }
+    });
 
+    res.json(projet)
+});
 var storage = multer.diskStorage({
     destination: function (req, file, callback) {
         callback(null, path.join(__dirname + '/uploads/'));
@@ -89,7 +99,10 @@ router.get('/archive/:_id', async (req, res, next) => {
     let projet = await Projet.findByIdAndUpdate(req.params, {isArchive : true})
     res.json({ success: true, msg: 'projet archived' , projet : projet });
 })
-
+router.get('/Desarchive/:_id', async (req, res, next) => {
+    let projet = await Projet.findByIdAndUpdate(req.params, {isArchive : flase})
+    res.json({ success: flase, msg: 'projet desarchived' , projet : projet });
+})
 
 
 module.exports = router;
