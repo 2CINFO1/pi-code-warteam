@@ -46,7 +46,7 @@ let upload = multer({ storage });
 router.post('/add', [
     check('TextC').isString(),
     check('TextC').isLength({ min: 5 })
-], auth, async (req, res) => {
+],async (req, res) => {
     // const errors = validationResult(req);
     let confirm = false;
     let words = req.body.TextC.split(" ")
@@ -54,14 +54,14 @@ router.post('/add', [
     for (i = 0; i < badwords.length; i++) {
         if (badwords[i].indexOf(words) !== -1)
             confirm = true;
-        textC.delete();
+        //textC.delete();
 
         break;
     }
     if (confirm) {
         const mailData = {
             from: "aymen.neji@esprit.com", // sender address
-            to: req.user.email, // list of receivers
+            to: "hamzarahali61@gmail.com", // list of receivers(req.user.email)
             subject: "Bad words ",
             text: "You are not allowed to send badwords here",
             html: "<h3>You are not allowed to send badwords here</h3>"
@@ -72,7 +72,7 @@ router.post('/add', [
             else res.send("msg send");
         });
 
-        return res.status('400').json('bad wordss')
+        return res.status('400').json('bad words')
     }
     //
 
