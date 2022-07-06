@@ -8,10 +8,20 @@ router.get('/display', async(req, res) => {
     res.json(prime)
 });
 
-
+/*
 router.post('/add', async(req, res, next) => {
 
+    let prime = await Prime.create({
+        prime: req.body.prime,
+        user: req.body.user
+    });
 
+    res.json(prime)
+});
+*/
+
+/////////////////////////////////////////
+router.post('/add', async(req, res, next) => {
 
     let prime = await Prime.create({
         prime: req.body.prime,
@@ -21,6 +31,8 @@ router.post('/add', async(req, res, next) => {
     res.json(prime)
 });
 
+
+/////////////////////////////////////////
 
 
 router.get('/delete/:_id', async(req, res) => {
@@ -33,5 +45,9 @@ router.post('/update/:_id', async(req, res) => {
     let prime = await Prime.updateOne(req.params, req.body);
     res.json(prime)
 })
+router.get('/display', async(req, res) => {
+    let primes = await Prime.find().populate('user');
+    res.json(primes)
+});
 
 module.exports = router

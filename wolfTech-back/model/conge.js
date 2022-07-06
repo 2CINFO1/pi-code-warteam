@@ -1,3 +1,4 @@
+/*
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
@@ -12,13 +13,18 @@ var Conge = new Schema({
 });
 
 module.exports = mongoose.model('conges', Conge);
-/*
+*/
 var mongoose = require("mongoose");
 var Schema = mongoose.Schema;
 var Conge = new mongoose.Schema({
-    subject: { type: String, required: "subject cant be blank" },
-    from: Date,
-    to: Date,
+    leave_subject: {
+        type: String,
+        required: "subject cant be blank",
+        enum: ["Sick leave", "Casual leave", "Public holiday", "Religious holidays", "Maternity leave"],
+        default: "Casual Leave"
+    },
+    start_date: Date,
+    end_date: Date,
     days: Number,
     status: {
         type: String,
@@ -34,14 +40,14 @@ var Conge = new mongoose.Schema({
         type: Boolean,
         default: false
     },
-    stud: {
+    user: {
         id: {
             type: mongoose.Schema.Types.ObjectId,
-            ref: "Student"
+            ref: "user"
         },
-        username: String
+        first_name: String,
+        last_name: String
     }
-}, { timestamps: {} });
+});
 
 module.exports = mongoose.model("conges", Conge);
-*/
