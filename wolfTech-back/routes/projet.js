@@ -4,8 +4,8 @@ var Projet = require('../model/Projet');
 var multer = require('multer');
 var path = require('path');
 const bodyParser = require('body-parser');
-const { check, validationResult } = require('express-validator');const { Router } = require('express');
- const app = express();
+const { check, validationResult } = require('express-validator'); const { Router } = require('express');
+const app = express();
 app.use(bodyParser.json());
 router.get('/', function (req, res) {
     Projet.find((err, data) => {
@@ -15,7 +15,7 @@ router.get('/', function (req, res) {
     });
 
 });
-router.get('/delete/:_id', async (req, res) => {
+router.delete('/delete/:_id', async (req, res) => {
     console.log(req.params);
     await Projet.findByIdAndDelete(req.params)
     res.json('delete success')
@@ -26,7 +26,8 @@ router.get('/delete/:_id', async (req, res) => {
 
 router.post('/update/:_id', async (req, res) => {
     let projet = await Projet.findById(req.params);
-    projet.Description = req.body.Description
+    projet.Description = req.body.Description,
+    projet.Nom = req.body.Description
     projet.save()
     res.json(projet)
 })
@@ -34,11 +35,11 @@ router.post('/update/:_id', async (req, res) => {
 
 router.get('/afficher', async (req, res) => {
     let projet = await Projet.find().populate({
-        path : 'Taches',
-        populate : {
-          path : 'User'
+        path: 'Taches',
+        populate: {
+            path: 'User'
         }
-      });
+    });
 
     res.json(projet)
 });
@@ -53,30 +54,30 @@ var storage = multer.diskStorage({
 });
 let upload = multer({ storage });
 
-router.post('/add', 
+router.post('/add',
 
-upload.single('file'), function (req, res) {
+    upload.single('file'), function (req, res) {
 
 
-    var P = new Projet({
-        Nom: req.body.Nom,
-        Description: req.body.Description,
-        Date_Debut: req.body.Date_Debut,
-        Date_Fin: req.body.Date_Fin,
-        Etat: req.body.Etat,
-        file: req.file.path
-        
+        var P = new Projet({
+            Nom: req.body.Nom,
+            Description: req.body.Description,
+            Date_Debut: req.body.Date_Debut,
+            Date_Fin: req.body.Date_Fin,
+            Etat: req.body.Etat,
+            file: req.file.path
+
+        });
+
+        P.save();
+        res.json(P)
+        upload(req, res, function (err) {
+            if (err) {
+                return res.end("Error uploading file.");
+            }
+            res.end("File is uploaded");
+        });
     });
-
-    P.save();
-    res.json(P)
-    upload(req, res, function (err) {
-        if (err) {
-            return res.end("Error uploading file.");
-        }
-        res.end("File is uploaded");
-    });
-});
 
 
 

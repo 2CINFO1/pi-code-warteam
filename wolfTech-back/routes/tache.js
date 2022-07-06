@@ -14,30 +14,30 @@ router.get('/', function (req, res) {
     });
 
 });
-router.get('/afficher', async(req, res) => {
+router.get('/afficher', async (req, res) => {
     let tache = await Tache.find();
 
     res.json(tache)
 });
-router.post('/update/:_id', async(req, res) => {
+router.post('/update/:_id', async (req, res) => {
     let tache = await Tache.findById(req.params);
     tache.Description = req.body.Description
     tache.save()
     res.json(tache)
 })
-router.get('/delete/:_id', async(req, res) => {
+router.get('/delete/:_id', async (req, res) => {
     console.log(req.params);
     await Tache.findByIdAndDelete(req.params)
     res.json('delete success')
 
 
-    
+
 });
 
 router.post('/add', async (req, res) => {
     try {
         let projet = await Projet.findById(req.body.Projet)
-        var T = await Tache.create({
+        let T = await Tache.create({
             Nom: req.body.Nom,
             Description: req.body.Description,
             Date_Debut: req.body.Date_Debut,
@@ -48,28 +48,28 @@ router.post('/add', async (req, res) => {
         res.json(T)
     } catch (error) {
         res.json(error)
-    }   
+    }
 });
 
-router.post('/affecter/:_id', async (req,res) =>{
+router.post('/affecter/:_id', async (req, res) => {
 
-try {
+    try {
 
-    let userId = req.body.userId
-    let tache = await Tache.findOne({User: userId, Etat: 'En cours'})
-    
-    if (tache ) {
-        res.status('400').json("User have Tasks")
-    }else {
-        let affectTache = await Tache.findById(req.params)
-        affectTache.User = userId;
-        affectTache.save();
-        res.json(affectTache)
+        let userId = req.body.userId
+        let tache = await Tache.findOne({ User: userId, Etat: 'En cours' })
+
+        if (tache) {
+            res.status('400').json("User have Tasks")
+        } else {
+            let affectTache = await Tache.findById(req.params)
+            affectTache.User = userId;
+            affectTache.save();
+            res.json(affectTache)
+        }
+
+    } catch (error) {
+
     }
-
-} catch (error) {
-    
-}
 
 
 
