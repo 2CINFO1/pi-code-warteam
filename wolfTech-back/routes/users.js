@@ -50,9 +50,7 @@ router.post("/register",uploadImg.single('image'),async (req, res) => {
       password,
       role
     } = req.body;
-    const{
-      image
-    } = req.file.path;
+    const image  = req.file.path;
 
 
 
@@ -237,6 +235,11 @@ router.get("/display", async (req, res) => {
 });
 
 
-
+router.post('/update', auth, async (req, res) => {
+  let user =  await User.findById({_id: req.user.user_id})
+  user.password =  await bcrypt.hash(req.body.password, 10);
+  user.save()
+  res.json(user)
+})
 
 module.exports = router;
