@@ -7,8 +7,14 @@ Nom : String,
 Description   : String,
 Date_Debut : Date,
 Date_Fin : Date,
-Etat : String,
-Projet : String
+Etat : {type: String, required: true, default: 'En cours' },
+User:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'user',
+    required: false
+},
+created_at: { type: Date, required: true, default: Date.now }
+
 }
 
 

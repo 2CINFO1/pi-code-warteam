@@ -11,7 +11,7 @@ const userSchema = new mongoose.Schema({
   role: {
     type: mongoose.Schema.ObjectId,
     ref:'roles' //le nom de la collection dans la bade de donnes 
-  }
+  } 
 
 });
 
