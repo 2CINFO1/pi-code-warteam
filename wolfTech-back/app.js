@@ -10,6 +10,7 @@ var reviewsRouter = require('./routes/reviews');
 var projetsRouter = require('./routes/projet');
 var tachesRouter = require('./routes/tache');
 var commentairesRouter = require('./routes/commentaire');
+//var likeRouter = require('./routes/like');
 var likeRouter = require('./routes/reaction');
 var reponsesRouter = require('./routes/reponse');
 var rolesRouter = require('./routes/role');
@@ -34,6 +35,7 @@ app.use(express.static(dirProjets));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+//app.use('/like', likeRouter);
 app.use('/reaction', likeRouter);
 app.use('/demandes', demandesRouter);
 app.use('/reviews', reviewsRouter);
@@ -42,6 +44,8 @@ app.use('/taches', tachesRouter);
 app.use('/commentaires', commentairesRouter);
 app.use('/reponses', reponsesRouter);
 app.use('/roles', rolesRouter);
+app.use('/uploads', express.static('./uploads'));
+
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {

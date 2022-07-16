@@ -5,11 +5,19 @@ var Projet = new Schema (
 {
 Nom : String,
 Description   : String,
-Date_Debut : Date,
-Date_Fin : Date,
+Date_Debut :  { type: Date, required: false },
+Date_Fin :  { type: Date, required: false },
 Etat : String,
-file : String
+file : String,
+Taches:[{
+    type: mongoose.Schema.ObjectId,
+    ref: 'taches',
+    required: false
+}],
+isArchive : {type : Boolean,default : false},
+created_at: { type: Date, required: true, default: Date.now }
 }
+
 
 
 

@@ -6,17 +6,12 @@ const userSchema = new mongoose.Schema({
   email: { type: String, unique: true },
   password: { type: String },
   token: { type: String },
+  blocked:{type : Boolean, default : false},
+  image:{type : String, default: null},
   role: {
     type: mongoose.Schema.ObjectId,
     ref:'roles' //le nom de la collection dans la bade de donnes 
-  },
-  likes: [
-    { type: mongoose.Schema.Types.ObjectId, ref: 'likes' }
-],
-commentaire:{
-  type: mongoose.Schema.ObjectId,
-  ref: 'commentaires'
-}
+  } 
 
 });
 

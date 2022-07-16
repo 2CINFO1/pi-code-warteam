@@ -46,7 +46,7 @@ let upload = multer({ storage });
 router.post('/add', [
     check('TextC').isString(),
     check('TextC').isLength({ min: 5 })
-],async (req, res) => {
+], auth, async (req, res) => {
     // const errors = validationResult(req);
     let confirm = false;
     let words = req.body.TextC.split(" ")
@@ -54,6 +54,7 @@ router.post('/add', [
     for (i = 0; i < badwords.length; i++) {
         if (badwords[i].indexOf(words) !== -1)
             confirm = true;
+            textC.delete();
         //textC.delete();
 
         break;
@@ -82,7 +83,8 @@ router.post('/add', [
     let rep = await Reponse.findById(req.body.Reponse)
     var c = new Commentaire({
         textC: req.body.TextC,
-        Reponse: rep
+        Reponse: rep,
+        file: req.file.path
     });
     c.save();
     res.json(c)
@@ -93,7 +95,7 @@ router.post('/add', [
     //     res.end("File is uploaded");
     // });
 });
-router.delete('/delete/:_id', async (req, res) => {
+router.get('/delete/:_id', async (req, res) => {
     console.log(req.params);
     await Commentaire.findByIdAndDelete(req.params)
     res.json('delete success')
