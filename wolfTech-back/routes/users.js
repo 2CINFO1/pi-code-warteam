@@ -5,14 +5,17 @@ var bcrypt = require('bcryptjs');
 var jwt = require("jsonwebtoken");
 const auth = require("../middleware/auth");
 const Role = require('../model/role');
+var multer  =   require('multer');
 
+//Email API
 const nodemailer = require("nodemailer");
+const user = require('../model/user');
 const transporter = nodemailer.createTransport({
   port: 465, // true for 465, false for other ports
   host: "smtp.gmail.com",
   auth: {
-    user: "hamzarahali61@gmail.com",
-    pass: "csvxokfsboedyhzb",
+    user: "ramikaabi93@gmail.com",
+    pass: "tfmypogadvvzxyxw",
   },
   secure: true,
 });
@@ -25,8 +28,19 @@ router.get('/', function (req, res, next) {
   res.send('respond with a resource');
 });
 
+const storage = multer.diskStorage({
+  destination: function (req, file, cb) {
+      cb(null, './uploads');
+    },
+  filename: function (req, file, cb) {
+      cb(null, file.originalname);
+  }
+});
+
+const uploadImg = multer({storage: storage});
+
 // Register
-router.post("/register", async (req, res) => {
+router.post("/register",uploadImg.single('image'),async (req, res) => {
   try {
     // Get user input
     const {
@@ -36,6 +50,9 @@ router.post("/register", async (req, res) => {
       password,
       role
     } = req.body;
+    const image  = req.file.path;
+
+
 
     // Validate user input
     if (!(email && password && first_name && last_name)) {
@@ -65,11 +82,12 @@ router.post("/register", async (req, res) => {
       last_name,
       email: email.toLowerCase(), // sanitize: convert email to lowercase
       password: encryptedPassword,
+      image
     });
 
     if (role == 'manager' || role == 'consultant') {
       const mailData = {
-        from: "rami.kaabi@gmail.com", // sender address
+        from: "ramikaabi93@gmail.com", // sender address
         to: user.email, // list of receivers
         subject: "Invite " + role,
         text: "Here is your account",
@@ -125,7 +143,8 @@ router.post("/login", async (req, res) => {
     }
     // Validate if user exist in our database
     const user = await User.findOne({
-      email
+      email,
+      blocked: false
     }).populate('role')
 
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -153,12 +172,74 @@ router.post("/login", async (req, res) => {
 });
 
 
-router.post("/current", auth, async (req, res) => {
+router.get("/current", auth, async (req, res) => {
   try {
-    console.log(req.user);
+    res.status(200).json(await User.findById(req.user.user_id))
   } catch (error) {
 
   }
 });
+
+router.post("/blocked", auth, async (req, res) => {
+  try {
+    let user = await User.findById(req.body.userId);
+    if (user) {
+      user.blocked = true;
+      user.save();
+      res.status(200).json("User Blocked");
+    }
+    res.status(200).json("User not existe");
+
+    
+    
+    
+  } catch (error) {
+
+  }
+});
+
+//reset password
+router.post("/reset", async(req,res)=>{
+  let user = req.body.userMail;
+  try {
+    const Data = {
+      from: "ramikaabi93@gmail.com", // sender address
+      to: user, // list of receivers
+      subject: "reset password ",
+      text: "Here is your account",
+       html: "<a>Bonjour Mr</a>" + 
+       "<a href='www.google.com'>Reset Password</a>"
+    };
+
+    transporter.sendMail(Data, function (err, info) {
+      if (err) res.send(err);
+      else res.send("msg send");
+    });
+    
+  } catch (error) {
+    
+  }
+})
+
+router.get("/display", async (req, res) => {
+  try {
+    let roleUser = await Role.findOne({
+      name: req.body.role
+    })
+    res.json({
+      user : await user.find({role: roleUser.id}).populate('role')
+    })
+  } catch (error) {
+
+  }
+});
+
+
+router.post('/update', auth, async (req, res) => {
+  let user =  await User.findById({_id: req.user.user_id})
+  user.password =  await bcrypt.hash(req.body.password, 10);
+  user.save()
+  res.json(user)
+})
 
 module.exports = router;
