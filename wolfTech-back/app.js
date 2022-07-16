@@ -3,7 +3,6 @@ var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
-
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
 var demandesRouter = require('./routes/demandes');
@@ -11,13 +10,13 @@ var reviewsRouter = require('./routes/reviews');
 var projetsRouter = require('./routes/projet');
 var tachesRouter = require('./routes/tache');
 var commentairesRouter = require('./routes/commentaire');
+var likeRouter = require('./routes/reaction');
 var reponsesRouter = require('./routes/reponse');
 var rolesRouter = require('./routes/role');
-
 var app = express();
 var mongoose = require('mongoose')
 
-mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', {useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true}, () => {
+mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, () => {
   console.log('Connected dataBase');
 })
 
@@ -35,6 +34,7 @@ app.use(express.static(dirProjets));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/reaction', likeRouter);
 app.use('/demandes', demandesRouter);
 app.use('/reviews', reviewsRouter);
 app.use('/projets', projetsRouter);
@@ -46,12 +46,12 @@ app.use('/uploads', express.static('./uploads'));
 
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
+app.use(function (req, res, next) {
   next(createError(404));
 });
 
 // error handler
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   // set locals, only providing error in development
   res.locals.message = err.message;
   res.locals.error = req.app.get('env') === 'development' ? err : {};
