@@ -55,16 +55,17 @@ router.post('/add', [
         if (badwords[i].indexOf(words) !== -1)
             confirm = true;
             textC.delete();
+        //textC.delete();
 
         break;
     }
     if (confirm) {
         const mailData = {
             from: "aymen.neji@esprit.com", // sender address
-            to: req.user.email, // list of receivers
+            to: "hamzarahali61@gmail.com", // list of receivers(req.user.email)
             subject: "Bad words ",
             text: "You are not allowed to send badwords here",
-            html: "<h3>You are not allowed to send badwords here</h3>" 
+            html: "<h3>You are not allowed to send badwords here</h3>"
         };
 
         transporter.sendMail(mailData, function (err, info) {
@@ -72,11 +73,11 @@ router.post('/add', [
             else res.send("msg send");
         });
 
-        return res.status('400').json('bad wordss')
+        return res.status('400').json('bad words')
     }
     //
 
-   
+
 
     // upload.single('file'), function (req, res) { }
     let rep = await Reponse.findById(req.body.Reponse)

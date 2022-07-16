@@ -38,7 +38,7 @@ router.post('/add', [
 
 
 
-router.get('/delete/:_id', async (req, res) => {
+router.delete('/delete/:_id', async (req, res) => {
     console.log(req.params);
     await Reponse.findByIdAndDelete(req.params)
     res.json('delete success')
