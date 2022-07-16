@@ -12,6 +12,7 @@ import { TablesComponent } from './components/tables/tables.component';
 import { IconsComponent } from './components/icons/icons.component';
 import { MapsComponent } from './components/maps/maps.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { CommentsComponent } from './components/comments/comments.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -28,7 +29,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     UserProfileComponent,
     TablesComponent,
     IconsComponent,
-    MapsComponent
+    MapsComponent,
+    CommentsComponent
   ]
 })
 

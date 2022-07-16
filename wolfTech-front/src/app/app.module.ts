@@ -23,7 +23,8 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
     ComponentsModule,
     NgbModule,
     RouterModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
   declarations: [
     AppComponent,
