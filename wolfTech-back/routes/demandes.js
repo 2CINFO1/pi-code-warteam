@@ -82,13 +82,13 @@ router.post('/actions/:_id', async (req, res) => {
     }
 })
 
-router.get('/stats', auth, async (req, res) => {
+router.get('/stats', async (req, res) => {
     try {
         let data = {
             'demande' : {
-                'progress': await Demande.find({user: req.user.user_id, status: 'progress'}).count(), 
-                'accepted': await Demande.find({user: req.user.user_id, status: 'accepted'}).count(),
-                'rejected': await Demande.find({user: req.user.user_id, status: 'rejected'}).count()
+                'progress': await Demande.find({/*user: req.user.user_id,*/ status: 'progress'}).count(), 
+                'accepted': await Demande.find({/*user: req.user.user_id,*/ status: 'accepted'}).count(),
+                'rejected': await Demande.find({/*user: req.user.user_id,*/ status: 'rejected'}).count()
             }
         }
         res.status(200).json(data)
