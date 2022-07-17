@@ -50,7 +50,9 @@ router.post("/register",uploadImg.single('image'),async (req, res) => {
       password,
       role
     } = req.body;
-    const image  = req.file.path;
+
+    let image;
+    if (req.file)  image  = req.file.path;
 
 
 
