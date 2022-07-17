@@ -16,4 +16,16 @@ export class UserService {
   register (body) {
     return this.httpClient.post(this.backEndApi + 'users/register', body)
   }
+
+  login (body) {
+    return this.httpClient.post(this.backEndApi + 'users/login', body)
+  }
+
+  isAuthenticated () {
+    return !localStorage.getItem('token');
+  }
+
+  logout () {
+    localStorage.clear()
+  }
 }
