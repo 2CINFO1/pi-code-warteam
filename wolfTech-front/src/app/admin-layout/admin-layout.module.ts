@@ -22,7 +22,9 @@ import { CommentsComponent } from './components/comments/comments.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     DashboardComponent,
