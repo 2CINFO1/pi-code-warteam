@@ -13,6 +13,7 @@ import { IconsComponent } from './components/icons/icons.component';
 import { MapsComponent } from './components/maps/maps.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { DemandesComponent } from './components/demandes/demandes.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -30,7 +31,8 @@ import { CommentsComponent } from './components/comments/comments.component';
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    CommentsComponent
+    CommentsComponent,
+    DemandesComponent
   ]
 })
 
