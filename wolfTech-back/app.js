@@ -15,6 +15,7 @@ var reponsesRouter = require('./routes/reponse');
 var rolesRouter = require('./routes/role');
 var app = express();
 var mongoose = require('mongoose')
+var cors = require("cors");
 
 mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, () => {
   console.log('Connected dataBase');
@@ -24,6 +25,7 @@ mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', { useNewUrlParser: true,
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
+app.use(cors());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
