@@ -83,7 +83,8 @@ router.post('/add', [
     let rep = await Reponse.findById(req.body.Reponse)
     var c = new Commentaire({
         textC: req.body.TextC,
-        Reponse: rep
+        Reponse: rep,
+        projet : req.body.projet
     });
     c.save();
     res.json(c)
