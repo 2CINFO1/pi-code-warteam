@@ -18,7 +18,7 @@ var app = express();
 var mongoose = require('mongoose')
 var cors = require("cors");
 
-mongoose.connect('mongodb://127.0.0.1:27017/wolf-tech', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, () => {
+mongoose.connect('mongodb+srv://esprit:12345678Hr@cluster0.cdl0smd.mongodb.net/wolf-tech', { useNewUrlParser: true, useCreateIndex: true, useUnifiedTopology: true }, () => {
   console.log('Connected dataBase');
 })
 
