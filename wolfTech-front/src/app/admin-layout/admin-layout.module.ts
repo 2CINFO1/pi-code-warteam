@@ -18,6 +18,7 @@ import { DemandesComponent } from './components/demandes/demandes.component';
 import { DemandeDetailsComponent } from './components/demande-details/demande-details.component';
 // import { ToastrModule } from 'ngx-toastr';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 
 @NgModule({
   imports: [
@@ -40,7 +41,8 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
     CommentsComponent,
     ProjectsComponent,
     DemandesComponent,
-    DemandeDetailsComponent
+    DemandeDetailsComponent,
+    ProjectDetailsComponent
   ]
 })
 

@@ -119,7 +119,7 @@
                       <a href="javascript:void(0)" class="avatar rounded-circle mr-3">
                         <img alt="Image placeholder" src="../assets/img/theme/bootstrap.jpg">
                       </a>
-                      <div class="media-body">
+                      <div class="media-body" (click)="navigateToProjectDetails(project.id)">
                         <span class="mb-0 text-sm">{{ project.nom }}</span>
                       </div>
                     </div>

@@ -16,4 +16,8 @@ export class ProjectService {
   readProjects () {
     return this.httpClient.get(this.backEndApi + 'projets/affichertout')
   }
+
+  readProject (projectId) {
+    return this.httpClient.get(this.backEndApi + 'projets/one/' + projectId)
+  }
 }
