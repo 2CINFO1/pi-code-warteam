@@ -44,6 +44,15 @@ router.get('/', async (req, res) => {
     }
 })
 
+router.get('/one/:_id', async (req, res) => {
+    try {
+      let demande = await Demande.findOne(req.params)
+      res.status(200).json(demande)
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+})
+
 router.post('/delete/:_id', auth, async (req, res) => {
     try {
         let demande = await Demande.findByIdAndDelete(req.params)
@@ -82,13 +91,13 @@ router.post('/actions/:_id', async (req, res) => {
     }
 })
 
-router.get('/stats', auth, async (req, res) => {
+router.get('/stats', async (req, res) => {
     try {
         let data = {
             'demande' : {
-                'progress': await Demande.find({user: req.user.user_id, status: 'progress'}).count(), 
-                'accepted': await Demande.find({user: req.user.user_id, status: 'accepted'}).count(),
-                'rejected': await Demande.find({user: req.user.user_id, status: 'rejected'}).count()
+                'progress': await Demande.find({/*user: req.user.user_id,*/ status: 'progress'}).count(), 
+                'accepted': await Demande.find({/*user: req.user.user_id,*/ status: 'accepted'}).count(),
+                'rejected': await Demande.find({/*user: req.user.user_id,*/ status: 'rejected'}).count()
             }
         }
         res.status(200).json(data)
