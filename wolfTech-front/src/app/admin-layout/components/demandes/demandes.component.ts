@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { Demande } from 'src/app/core/models/demande';
 import { DemandeService } from 'src/app/core/services/demande.service';
 
@@ -12,7 +13,8 @@ export class DemandesComponent implements OnInit {
   demandes: Demande[] = []
 
   constructor(
-    private demandeService: DemandeService
+    private demandeService: DemandeService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -28,7 +30,7 @@ export class DemandesComponent implements OnInit {
   }
 
   readDemandes () {
-    this.demandeService.readDemandes().subscribe((response: any) => {
+    this.demandeService.readDemandes({}).subscribe((response: any) => {
       response.map( demande => {
         demande = new Demande(demande)
         this.demandes.push(demande)
@@ -36,4 +38,7 @@ export class DemandesComponent implements OnInit {
     })
   }
 
+  navigateToDemandeDetails(demandeId) {
+    this.router.navigate(['demande-details', demandeId])
+  }
 }

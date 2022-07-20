@@ -17,8 +17,12 @@ export class DemandeService {
     return this.httpClient.post(this.backEndApi + 'demandes/create', body)
   }
 
-  readDemandes () {
-    return this.httpClient.get(this.backEndApi + 'demandes')
+  readDemandes (body) {
+    return this.httpClient.get(this.backEndApi + 'demandes', body)
+  }
+
+  readDemande (demandeId) {
+    return this.httpClient.get(this.backEndApi + 'demandes/one/' + demandeId)
   }
 
   deleteDemande (demandeId) {

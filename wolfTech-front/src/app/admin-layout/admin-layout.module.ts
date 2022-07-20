@@ -14,7 +14,9 @@ import { MapsComponent } from './components/maps/maps.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { DemandesComponent } from './components/demandes/demandes.component';
+import { DemandeDetailsComponent } from './components/demande-details/demande-details.component';
 // import { ToastrModule } from 'ngx-toastr';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
 
 @NgModule({
   imports: [
@@ -23,7 +25,8 @@ import { DemandesComponent } from './components/demandes/demandes.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    PdfViewerModule
   ],
   declarations: [
     DashboardComponent,
@@ -32,7 +35,8 @@ import { DemandesComponent } from './components/demandes/demandes.component';
     IconsComponent,
     MapsComponent,
     CommentsComponent,
-    DemandesComponent
+    DemandesComponent,
+    DemandeDetailsComponent
   ]
 })
 
