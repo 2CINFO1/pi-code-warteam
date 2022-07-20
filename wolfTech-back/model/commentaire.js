@@ -13,6 +13,10 @@ user:{
     type: mongoose.Schema.ObjectId,
     ref: 'users'
 },
+projet: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'projets'
+},
 
  },
  { timestamps: true }

@@ -23,7 +23,9 @@ import { ProjectsComponent } from './components/projects/projects.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule,
+    FormsModule
   ],
   declarations: [
     DashboardComponent,
