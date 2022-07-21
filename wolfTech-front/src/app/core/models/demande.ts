@@ -1,4 +1,5 @@
 import { environment } from "src/environments/environment";
+import { User } from "./user";
 
 export class Demande {
 
@@ -7,7 +8,7 @@ export class Demande {
     public description: string;
     public file: string;
     public status: string;
-    public user: string;
+    public client: User;
     public created_at: string;
 
     constructor (data) {
@@ -16,6 +17,7 @@ export class Demande {
         this.description = data.description
         this.file = environment.backEndApi + data.file;
         this.status = data.status;
+        this.client = data.user ? new User(data.user) : null 
         this.created_at = data.created_at
     }
 

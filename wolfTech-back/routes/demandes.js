@@ -37,7 +37,7 @@ router.post('/create', auth, upload.single('file'), async (req, res) => {
 
 router.get('/', async (req, res) => {
     try {
-        let demandes = await Demande.find()
+        let demandes = await Demande.find().populate('user')
         res.status(200).json(demandes);
     } catch (error) {
         res.status(400).json(error.message);
@@ -76,6 +76,7 @@ router.post('/actions/:_id', async (req, res) => {
         let demande = await Demande.findById(req.params)
         demande.status = req.body.status
         demande.save()
+        console.log(demande)
         if (demande.status == 'accepted') {
             let projetData = {
                 Nom: demande.title,

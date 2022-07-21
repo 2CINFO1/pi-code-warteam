@@ -41,4 +41,11 @@ export class DemandesComponent implements OnInit {
   navigateToDemandeDetails(demandeId) {
     this.router.navigate(['demande-details', demandeId])
   }
+
+  changeActionDemande(demande, status) {
+    this.demandeService.changeAction(demande.id, {status}).subscribe((response: any) => {
+      console.log(response);
+      
+    })
+  }
 }
