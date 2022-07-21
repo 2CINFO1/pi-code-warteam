@@ -20,6 +20,7 @@ import { DemandeDetailsComponent } from './components/demande-details/demande-de
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { AddDemandeComponent } from './components/add-demande/add-demande.component';
 
 @NgModule({
   imports: [
@@ -44,7 +45,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     ProjectsComponent,
     DemandesComponent,
     DemandeDetailsComponent,
-    ProjectDetailsComponent
+    ProjectDetailsComponent,
+    AddDemandeComponent
   ]
 })
 
