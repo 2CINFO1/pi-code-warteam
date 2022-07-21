@@ -43,10 +43,10 @@ var storage = multer.diskStorage({
 });
 let upload = multer({ storage });
 //Ajouter commentaire 
-router.post('/add', [
+router.post('/add', auth,[
     check('TextC').isString(),
     check('TextC').isLength({ min: 5 })
-], auth, async (req, res) => {
+], async (req, res) => {
     // const errors = validationResult(req);
     let confirm = false;
     let words = req.body.TextC.split(" ")
@@ -84,7 +84,8 @@ router.post('/add', [
     var c = new Commentaire({
         textC: req.body.TextC,
         Reponse: rep,
-        projet : req.body.projet
+        user: req.user.user_id,
+        demande : req.body.demande
     });
     c.save();
     res.json(c)
@@ -101,8 +102,8 @@ router.get('/delete/:_id', async (req, res) => {
     res.json('delete success')
 
 });
-router.get('/afficher', async (req, res) => {
-    let commentaire = await Commentaire.find();
+router.get('/afficher/:_id', async (req, res) => {
+    let commentaire = await Commentaire.find({demande: req.params._id}).populate(['user', 'demande']);
     res.json(commentaire)
 });
 router.post('/update/:_id', async (req, res) => {

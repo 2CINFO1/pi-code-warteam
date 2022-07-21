@@ -5,15 +5,17 @@ const commentaire = require('../model/commentaire');
 var router = express.Router();
 const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
+const { response } = require('express');
 const app = express();
 app.use(bodyParser.json());
 //liste des reponse
-router.get('/', function (req, res) {
-    Reponse.find(function (err, data) {
-        if (err) throw err;
-        // res.render("showcontact.twig", {data})
-        res.json(data);
-    });
+router.get('/:_id', async (req, res)=> {
+    try {
+        let responses = await Reponse.find({commentaire: req.params._id})
+        res.json(responses)
+    } catch (error) {
+        res.json(error.message)
+    }
 });
 
 //Ajouter reponse 
@@ -26,7 +28,6 @@ router.post('/add', [
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
-        res.send('response saved');
         let comment = await commentaire.findById(req.body.commentaire)
         var c = new Reponse({
             textR: req.body.textR,

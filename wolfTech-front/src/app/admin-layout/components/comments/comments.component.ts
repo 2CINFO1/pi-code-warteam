@@ -28,7 +28,7 @@ export class CommentsComponent implements OnInit {
   }
   
   afficherComments() {
-    this.commentService.afficherComments().subscribe((response: any) => {
+    this.commentService.afficherComments(2).subscribe((response: any) => {
       response.map(comment => {
         comment = new Comment(comment)
         this.comments.push(comment)
