@@ -22,7 +22,7 @@
         <div class="mt-4 card shadow">
             <div class="card-header border-0 d-flex align-items-center justify-content-between">
                 <h3 class="mb-0">Tasks List - Project : {{ project?.nom }}</h3>
-                <button type="button" (click)="open(addTask)" *ngIf="role == 'manager' || role =='ceo'">+ Add Task</button>
+                <button type="button" (click)="open(addTaskModal)" *ngIf="role == 'manager' || role =='ceo'">+ Add Task</button>
               </div>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
@@ -65,7 +65,7 @@
 </div>
 
 <!-- MODAL Add Task -->
-<ng-template #addTask let-modal>
+<ng-template #addTaskModal let-modal>
     <div class="modal-header">
       <h4 class="modal-title" id="modal-basic-title">Add Task : </h4>
       <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
@@ -106,9 +106,6 @@
             <ng-select formControlName="consultant">
               <ng-option *ngFor="let consultant of consultants" [value]="consultant.id">{{consultant.first_name}} {{ consultant.last_name }}</ng-option>
             </ng-select>
-            <div *ngIf="submitted && f.consultant.errors" class="invalid-feedback">
-                <div *ngIf="f.consultant.errors.required">Consultant is required</div>
-            </div>
         </div>
         <div class="modal-footer">
             <button type="submit" class="btn btn-outline-dark">Save</button>
