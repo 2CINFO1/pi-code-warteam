@@ -1,3 +1,4 @@
+import { environment } from "src/environments/environment";
 import { Task } from "./task";
 
 export class Project {
@@ -18,7 +19,7 @@ export class Project {
         this.date_debut = data.Date_Debut
         this.date_fin = data.Date_Fin
         this.etat= data.Etat
-        this.file= data.file
+        this.file= environment.backEndApi + data.file
         this.tasks = data.Taches.map( task => new Task(task))
     }
 }

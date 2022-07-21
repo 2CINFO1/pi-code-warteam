@@ -34,6 +34,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 var dirProjets = path.join(__dirname, 'routes/projets');
 app.use(express.static(dirProjets));
+var dirUploads = path.join(__dirname, 'routes/uploads');
+app.use(express.static(dirUploads));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
