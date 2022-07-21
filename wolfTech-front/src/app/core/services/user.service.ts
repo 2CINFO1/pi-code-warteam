@@ -8,7 +8,8 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   backEndApi = environment.backEndApi
-
+  user = {};
+  
   constructor(
     private httpClient: HttpClient
   ) { }
@@ -28,4 +29,8 @@ export class UserService {
   logout () {
     localStorage.clear()
   }
+  display(body){
+    return this.httpClient.post(this.backEndApi + 'users/display', body)
+  }
+
 }

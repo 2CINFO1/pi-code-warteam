@@ -24,7 +24,8 @@ export class RegisterComponent implements OnInit {
         first_name: ['', Validators.required],
         last_name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]]
+        password: ['', [Validators.required, Validators.minLength(6)]],
+        image: ['',[Validators.required]]
     })
   }
 
@@ -37,12 +38,16 @@ export class RegisterComponent implements OnInit {
         return;
     }
 
-    let body = {
-      ...this.registerForm.value,
-      role: 'client'
-    }
 
-    this.userService.register(body).subscribe((response: any) => {
+    let formData = new FormData();
+    formData.append('file', this.registerForm.get('image').value)
+    formData.append('first_name', this.registerForm.get('first_name').value)
+    formData.append('last_name', this.registerForm.get('last_name').value)
+    formData.append('email', this.registerForm.get('email').value)
+    formData.append('password', this.registerForm.get('password').value)
+    formData.append('role', 'client')
+
+    this.userService.register(formData).subscribe((response: any) => {
       this.registerForm.reset()
       this.router.navigate(['/login'])
     })

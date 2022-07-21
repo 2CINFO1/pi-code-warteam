@@ -14,6 +14,7 @@ import { MapsComponent } from './components/maps/maps.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
 import { ProjectsComponent } from './components/projects/projects.component';
+import { InviteUserComponent } from './components/invite-user/invite-user.component';
 // import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
@@ -23,7 +24,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
@@ -32,7 +34,8 @@ import { ProjectsComponent } from './components/projects/projects.component';
     IconsComponent,
     MapsComponent,
     CommentsComponent,
-    ProjectsComponent
+    ProjectsComponent,
+    InviteUserComponent
   ]
 })
 

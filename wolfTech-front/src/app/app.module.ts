@@ -16,7 +16,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InterceptorService } from './core/services/interceptor.service';
-
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   imports: [
@@ -36,7 +36,8 @@ import { InterceptorService } from './core/services/interceptor.service';
     AdminLayoutComponent,
     HomePageComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    FileUploadComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

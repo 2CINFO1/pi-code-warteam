@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/services/user.service';
 
 declare interface RouteInfo {
     path: string;
@@ -12,6 +13,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '', role: ['ceo', 'manager'] },
     { path: '/projects', title: 'Projects',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager'] },
     { path: '/comments', title: 'Comments',  icon:'ni ni-palette text-orange', class: '', role: ['client'] },
+    { path: '/invite-user', title: 'addUser',  icon:'ni ni-palette text-orange', class: '', role: ['ceo'] },
     { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', role: ['client'] },
     { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '', role: ['client', 'manager'] },
     { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', role: [] },
@@ -30,10 +32,12 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
   role = localStorage.getItem('role')
+  user:any = {}
 
-  constructor(private router: Router) { }
+  constructor(private router: Router, private userService : UserService) { }
 
   ngOnInit() {
+    this.user=this.userService.user;
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
@@ -47,4 +51,5 @@ export class SidebarComponent implements OnInit {
     }
     return false;
   }
+
 }

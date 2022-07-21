@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { User } from '../core/models/user';
 import { UserService } from '../core/services/user.service';
 
 @Component({
@@ -40,6 +41,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.reset()
       localStorage.setItem('role', response.role.name)
       localStorage.setItem('token', response.token)
+      this.userService.user= new User(response);
       this.router.navigate(['/dashboard'])
     })
   }
