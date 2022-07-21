@@ -40,4 +40,8 @@ export class DemandeService {
   statsDemande () {
     return this.httpClient.get(this.backEndApi + 'demandes/stats');
   }
+
+  readDemandesByUser () {
+    return this.httpClient.get(this.backEndApi + 'demandes/user')
+  }
 }

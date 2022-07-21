@@ -53,6 +53,15 @@ router.get('/one/:_id', async (req, res) => {
     }
 })
 
+router.get('/user', auth, async (req, res) => {
+    try {
+        let demandes = await Demande.find({user: req.user.user_id})
+        res.status(200).json(demandes)
+    } catch (error) {
+        res.status(400).json(error.message);
+    }
+})
+
 router.post('/delete/:_id', auth, async (req, res) => {
     try {
         let demande = await Demande.findByIdAndDelete(req.params)
