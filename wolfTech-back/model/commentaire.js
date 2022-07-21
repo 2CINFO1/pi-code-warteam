@@ -11,11 +11,11 @@ reponse:[{
 }],
 user:{
     type: mongoose.Schema.ObjectId,
-    ref: 'users'
+    ref: 'user'
 },
-projet: {
+demande: {
     type: mongoose.Schema.ObjectId,
-    ref: 'projets'
+    ref: 'demandes'
 },
 
  },

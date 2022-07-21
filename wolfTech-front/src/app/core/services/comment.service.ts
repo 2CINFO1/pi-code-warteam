@@ -16,7 +16,16 @@ export class CommentService {
   createComment (body: any) {
     return this.httpClient.post(this.backEndApi + 'commentaires/add', body)
   }
-  afficherComments () {
-    return this.httpClient.get(this.backEndApi + 'commentaires/afficher')
+
+  afficherComments (demandeId) {
+    return this.httpClient.get(this.backEndApi + 'commentaires/afficher/' + demandeId)
+  }
+
+  createReponseComment (body) {
+    return this.httpClient.post(this.backEndApi + 'reponses/add', body)
+  }
+
+  readResponsesByComment (commentId) {
+    return this.httpClient.get(this.backEndApi + 'reponses/' + commentId)
   }
 }
