@@ -19,6 +19,7 @@ import { DemandeDetailsComponent } from './components/demande-details/demande-de
 // import { ToastrModule } from 'ngx-toastr';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -30,7 +31,8 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
     ClipboardModule,
     ReactiveFormsModule,
     FormsModule,
-    PdfViewerModule
+    PdfViewerModule,
+    NgSelectModule
   ],
   declarations: [
     DashboardComponent,
