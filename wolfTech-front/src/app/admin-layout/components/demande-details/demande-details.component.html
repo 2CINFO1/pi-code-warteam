@@ -1,0 +1,27 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="card shadow card-body">
+            <h5 class="card-title text-center">{{ demande?.title }}</h5>
+            <p class="card-text">{{ demande?.description }}</p>
+            <pdf-viewer
+                [src]="demande?.file"
+                [rotation]="0"
+                [original-size]="false"
+                [show-all]="true"
+                [fit-to-page]="false"
+                [zoom]="1"
+                [zoom-scale]="'page-width'"
+                [stick-to-page]="false"
+                [render-text]="true"
+                [external-link-target]="'blank'"
+                [autoresize]="true"
+                [show-borders]="false"
+                style="width: 100%; height: 600px;"
+            ></pdf-viewer>
+        </div>
+        <!-- AYMEN COMMENTAIRE -->
+        <div class="mt-4 card shadow">
+            <h4>Ajouter des commentaires</h4>
+        </div>
+    </div>
+</div>

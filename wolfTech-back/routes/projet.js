@@ -92,7 +92,19 @@ router.post('/add',
         });
     });
 
-
+router.get('/one/:_id', async (req, res) => {
+    try {
+        let projet = await Projet.findOne(req.params).populate({
+            path: 'Taches',
+            populate: {
+                path: 'User'
+            }
+        })
+       res.json(projet)
+    } catch (error) {
+        res.json(error.message)
+    }
+})
 
 
 router.get('/archive/:_id', async (req, res, next) => {
