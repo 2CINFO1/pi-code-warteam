@@ -11,6 +11,7 @@ import { DemandeService } from 'src/app/core/services/demande.service';
 export class DemandesComponent implements OnInit {
 
   demandes: Demande[] = []
+  public stats: any;
 
   constructor(
     private demandeService: DemandeService,
@@ -24,8 +25,7 @@ export class DemandesComponent implements OnInit {
 
   readStatsDemande () {
     this.demandeService.statsDemande().subscribe((response: any) => {
-      console.log(response);
-      
+      this.stats = response.demande
     })
   }
 
@@ -44,8 +44,8 @@ export class DemandesComponent implements OnInit {
 
   changeActionDemande(demande, status) {
     this.demandeService.changeAction(demande.id, {status}).subscribe((response: any) => {
-      console.log(response);
-      
+      this.demandes = []
+      this.readDemandes()
     })
   }
 }
