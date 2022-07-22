@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { Project } from 'src/app/core/models/project';
+import { Task } from 'src/app/core/models/task';
 import { ProjectService } from 'src/app/core/services/project.service';
 
 @Component({
@@ -11,9 +12,11 @@ import { ProjectService } from 'src/app/core/services/project.service';
 export class ProjectsComponent implements OnInit {
 
   projects: Project[] = []
+  role = localStorage.getItem('role')
+
   constructor(
     private projectService: ProjectService,
-    private router: Router    
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +29,8 @@ export class ProjectsComponent implements OnInit {
         project = new Project(project)
         this.projects.push(project)
       })
+      
+ 
       console.log(this.projects);
       
     })

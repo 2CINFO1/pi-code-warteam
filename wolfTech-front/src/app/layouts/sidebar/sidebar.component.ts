@@ -16,7 +16,7 @@ export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '', role: ['ceo', 'manager'] },
     { path: '/demandes', title: 'Demandes',  icon: 'ni ni-spaceship text-orange', class: '', role: ['ceo', 'manager'] },
     { path: '/create-demande', title: 'Create Demande',  icon: 'ni-tv-2 text-orange', class: '', role: ['client'] },
-    { path: '/projects', title: 'Projects',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager'] },
+    { path: '/projects', title: 'Projects',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager', 'consultant'] },
     { path: '/comments', title: 'Comments',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager', 'client', 'consultant'] },
     { path: '/leave-request', title: 'Leave request',  icon: 'ni ni-palette text-orange', class: '', role: ['consultant'] },
     { path: '/leave-list', title: 'Leave list',  icon: 'ni ni-palette text-orange', class: '', role: ['consultant'] },

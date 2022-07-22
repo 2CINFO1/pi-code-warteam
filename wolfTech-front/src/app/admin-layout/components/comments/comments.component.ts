@@ -24,7 +24,7 @@ export class CommentsComponent implements OnInit {
     this.commentForm = this.formBuilder.group({
       TextC: ['', Validators.required]
     })
-    //this.afficherComments()
+    // this.afficherComments()
   }
   
   afficherComments() {
