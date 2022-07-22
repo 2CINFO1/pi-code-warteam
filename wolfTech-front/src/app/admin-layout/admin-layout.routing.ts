@@ -7,6 +7,7 @@ import { DemandesComponent } from './components/demandes/demandes.component';
 import { IconsComponent } from './components/icons/icons.component';
 import { LeaveRequestComponent } from './components/leave-request/leave-request.component';
 import { LeaveListComponent } from './components/leave-list/leave-list.component';
+import { InviteUserComponent } from './components/invite-user/invite-user.component';
 import { MapsComponent } from './components/maps/maps.component';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { ProjectsComponent } from './components/projects/projects.component';
@@ -27,4 +28,5 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'demandes',             component: DemandesComponent},
     { path: 'demande-details/:id',  component: DemandeDetailsComponent},
     { path: 'create-demande',       component: AddDemandeComponent}
+    { path: 'invite-user', component: InviteUserComponent}
 ];

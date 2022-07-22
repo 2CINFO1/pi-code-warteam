@@ -17,7 +17,7 @@ import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InterceptorService } from './core/services/interceptor.service';
 import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
-
+import { FileUploadComponent } from './components/file-upload/file-upload.component';
 
 @NgModule({
   imports: [
@@ -36,7 +36,10 @@ import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
     AppComponent,
     AdminLayoutComponent,
     HomePageComponent,
-    AuthLayoutComponent
+    AuthLayoutComponent,
+    LoginComponent,
+    RegisterComponent,
+    FileUploadComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

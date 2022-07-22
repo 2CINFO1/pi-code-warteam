@@ -34,6 +34,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/uploads', express.static('uploads'))
 var dirProjets = path.join(__dirname, 'routes/projets');
 app.use(express.static(dirProjets));
 var dirUploads = path.join(__dirname, 'routes/uploads');

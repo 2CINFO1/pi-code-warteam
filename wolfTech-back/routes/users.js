@@ -40,7 +40,7 @@ const storage = multer.diskStorage({
 const uploadImg = multer({storage: storage});
 
 // Register
-router.post("/register",uploadImg.single('image'),async (req, res) => {
+router.post("/register",uploadImg.single('file'),async (req, res) => {
   try {
     // Get user input
     const {

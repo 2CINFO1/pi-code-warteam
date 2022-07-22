@@ -20,6 +20,7 @@ import { LeaveListComponent } from './components/leave-list/leave-list.component
 import { ProjectsComponent } from './components/projects/projects.component';
 import { DemandesComponent } from './components/demandes/demandes.component';
 import { DemandeDetailsComponent } from './components/demande-details/demande-details.component';
+import { InviteUserComponent } from './components/invite-user/invite-user.component';
 // import { ToastrModule } from 'ngx-toastr';
 import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
@@ -52,7 +53,8 @@ import { AddDemandeComponent } from './components/add-demande/add-demande.compon
     DemandesComponent,
     DemandeDetailsComponent,
     ProjectDetailsComponent,
-    AddDemandeComponent
+    AddDemandeComponent,
+    InviteUserComponent
   ]
 })
 
