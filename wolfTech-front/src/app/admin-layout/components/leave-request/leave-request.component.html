@@ -1,0 +1,63 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="card m-3">
+            <h5 class="card-header">Request For Leave</h5>
+            <div class="card-body">
+                <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Leave Type</label>
+                            <select formControlName="leave_subject" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.leave_subject.errors }">
+                          <option value="Sick Leave">Sick Leave</option>
+                          <option value="Casual Leave">Casual Leave</option>
+                          <option value="Maternity Leave"> Maternity Leave</option>
+                          <option value="Religious Holidays">Religious Holidays</option>
+                          <option value="Public Holidays">Public Holidays</option>
+                      </select>
+                            <div *ngIf="submitted && f.leave_subject.errors" class="invalid-feedback">
+                                <div *ngIf="f.leave_subject.errors.required">Leave type is required</div>
+                            </div>
+                        </div>
+
+
+                    </div>
+
+                    <div class="form-group">
+                        <label>Leave Reason</label>
+                        <input type="text" formControlName="leave_reason" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.leave_reason.errors }" />
+                        <div *ngIf="submitted && f.leave_reason.errors" class="invalid-feedback">
+                            <div *ngIf="f.leave_reason.errors.required">leave_reason is required</div>
+                            <div *ngIf="f.leave_reason.errors.leave_reason">Leave Reason is required</div>
+                        </div>
+                    </div>
+                    <div class="form-row">
+                        <div class="form-group col">
+                            <label>Start Date</label>
+                            <input type="date" formControlName="start_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.start_date.errors }" />
+                            <div *ngIf="submitted && f.start_date.errors" class="invalid-feedback">
+                                <div *ngIf="f.start_date.errors.required">start date is required</div>
+                            </div>
+                        </div>
+                        <div class="form-group col">
+                            <label>End Date</label>
+                            <input type="date" formControlName="end_date" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.end_date.errors }" />
+                            <div *ngIf="submitted && f.end_date.errors" class="invalid-feedback">
+                                <div *ngIf="f.end_date.errors.required">End date is required</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group form-check">
+                        <input type="checkbox" formControlName="acceptTerms" id="acceptTerms" class="form-check-input" [ngClass]="{ 'is-invalid': submitted && f.acceptTerms.errors }" />
+                        <label for="acceptTerms" class="form-check-label">Accept Terms & Conditions</label>
+                        <div *ngIf="submitted && f.acceptTerms.errors" class="invalid-feedback">Accept Ts & Cs is required</div>
+                    </div>
+                    <div class="text-center">
+                        <button class="btn btn-primary mr-1">Submit</button>
+                        <button class="btn btn-secondary" type="reset">Cancel</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

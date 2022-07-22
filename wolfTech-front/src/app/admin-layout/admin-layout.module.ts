@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -13,7 +14,9 @@ import { IconsComponent } from './components/icons/icons.component';
 import { MapsComponent } from './components/maps/maps.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
-// import { ToastrModule } from 'ngx-toastr';
+import { LeaveRequestComponent } from './components/leave-request/leave-request.component';
+import { LeaveListComponent } from './components/leave-list/leave-list.component';
+
 
 @NgModule({
   imports: [
@@ -22,7 +25,9 @@ import { CommentsComponent } from './components/comments/comments.component';
     FormsModule,
     HttpClientModule,
     NgbModule,
-    ClipboardModule
+    ClipboardModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     DashboardComponent,
@@ -30,7 +35,9 @@ import { CommentsComponent } from './components/comments/comments.component';
     TablesComponent,
     IconsComponent,
     MapsComponent,
-    CommentsComponent
+    CommentsComponent,
+    LeaveRequestComponent,
+    LeaveListComponent,
   ]
 })
 

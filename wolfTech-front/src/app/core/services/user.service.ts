@@ -7,7 +7,7 @@ import { HttpClient } from '@angular/common/http';
 })
 export class UserService {
 
-  backEndApi = environment.backEndApi
+  backEndApi = environment.backEndApi;
 
   constructor(
     private httpClient: HttpClient
@@ -26,6 +26,6 @@ export class UserService {
   }
 
   logout () {
-    localStorage.clear()
+    localStorage.clear();
   }
 }

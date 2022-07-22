@@ -36,7 +36,7 @@ import { InterceptorService } from './core/services/interceptor.service';
     AdminLayoutComponent,
     HomePageComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },
