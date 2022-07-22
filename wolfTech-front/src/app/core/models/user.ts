@@ -1,13 +1,14 @@
 export class User {
 
     public id: string;
-    public first_name: string;
-    public last_name: string;
-    public email: string;
-    public password: string;
-    public token: string;
-    public blocked: string;
+    public first_name : String;
+    public last_name  : String;
+    public email : String;
+    public password :  String;
+    public token: String;
+    public blocked : boolean;
     public image: string;
+
 
     constructor (data) {
         this.id = data._id
@@ -19,3 +20,4 @@ export class User {
         this.image= data.image ? "http://localhost:3000/uploads/" + data.image.split('\\')[1] : 'https://cdn-icons-png.flaticon.com/512/219/219983.png';
     }
 }
+
