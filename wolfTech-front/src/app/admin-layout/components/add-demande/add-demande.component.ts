@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Demande } from 'src/app/core/models/demande';
 import { DemandeService } from 'src/app/core/services/demande.service';
 
@@ -19,7 +20,8 @@ export class AddDemandeComponent implements OnInit {
 
   constructor(
     private formBuilder: FormBuilder,
-    private demandeService: DemandeService
+    private demandeService: DemandeService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -45,7 +47,12 @@ export class AddDemandeComponent implements OnInit {
 
     this.demandeService.createDemande(this.formData).subscribe((response: any) => {
       this.submitted = false;
+      this.createEventBlock = false
+      this.demandes.unshift(new Demande(response))
       this.demandeForm.reset({})
+      this.formData.delete('title')
+      this.formData.delete('description')
+      this.formData.delete('file')
     })
   }
 
@@ -67,7 +74,12 @@ export class AddDemandeComponent implements OnInit {
 
   deleteDemande (demande) {
     this.demandeService.deleteDemande(demande.id).subscribe((response: any) => {
+      this.demandes = []
       this.readDemandeByUser()
     })
+  }
+
+  navigateToDemandeDetails(demandeId) {
+    this.router.navigate(['demande-details', demandeId])
   }
 }

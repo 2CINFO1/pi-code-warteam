@@ -2,9 +2,9 @@
     <div class="container-fluid">
         <div class="card shadow" *ngIf="createEventBlock">
             <div class="container-fluid">
-                <div class="d-flex justify-content-between">
+                <div class="container d-flex justify-content-between" style="margin: 16px;">
                     <h3>Create Demande</h3>
-                    <h3 style="cursor: pointer;" (click)="createEventBlock = false">< back</h3>
+                    <h3 style="cursor: pointer;" class="btn btn-outline-warning" (click)="createEventBlock = false">< back</h3>
                 </div>
                 <form [formGroup]="demandeForm" (ngSubmit)="createDemande()">
                     <div class="form-group">
@@ -27,17 +27,17 @@
                         <input type="file" class="form-control" (change)="uploadFiles($event.target.files)">
                     </div>
 
-                    <div class="d-flex justify-content-end">
-                        <button type="submit">Add demande</button>
+                    <div class="d-flex justify-content-end"  style="margin: 16px;">
+                        <button type="submit" class="btn btn-outline-success">Add demande</button>
                     </div>
                 </form>
             </div>
         </div>
 
         <div class="card shadow" *ngIf="!createEventBlock">
-            <div class="d-flex justify-content-between">
+            <div class="container d-flex justify-content-between" style="margin: 16px;">
                 <h2>Demandes : </h2>
-                <button type="button" (click)="createEventBlock = true">Add Demande</button>
+                <button type="button" class="btn btn-outline-success" (click)="createEventBlock = true">Add Demande</button>
             </div>
             <div class="table-responsive">
                 <table class="table align-items-center table-flush">
@@ -50,6 +50,11 @@
                     </tr>
                   </thead>
                   <tbody>
+                    <tr *ngIf="!demandes.length">
+                        <th></th>
+                        <th col="5">No data ...</th>
+                        <th></th>
+                    </tr>
                     <tr *ngFor="let demande of demandes">
                       <th scope="row">
                         <div class="media align-items-center">
@@ -79,14 +84,12 @@
                         {{ demande.client?.first_name }} {{ demande?.client?.last_name }}
                       </td>
                       <td class="text-right">
-                        <div ngbDropdown placement="bottom-right">
-                          <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
-                            <i class="fas fa-ellipsis-v"></i>
-                          </a>
-                          <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                            <a class="dropdown-item" href="javascript:void(0)" (click)="deleteDemande(demande)">Delete</a>
-                          </div>
-                        </div>
+                        <button class="btn btn-outline-warning"  (click)="deleteDemande(demande)">
+                          Delete
+                        </button>
+                        <button (click)="navigateToDemandeDetails(demande.id)" class="btn btn-outline-info">
+                          View
+                        </button>
                       </td>
                     </tr>
                   </tbody>
