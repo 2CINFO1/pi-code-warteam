@@ -6,7 +6,7 @@ declare interface RouteInfo {
     title: string;
     icon: string;
     class: string;
-    role: string[]
+    role: string[];
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '', role: ['ceo', 'manager'] },
@@ -14,7 +14,9 @@ export const ROUTES: RouteInfo[] = [
     { path: '/create-demande', title: 'Create Demande',  icon: 'ni-tv-2 text-orange', class: '', role: ['client'] },
     { path: '/projects', title: 'Projects',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager', 'consultant'] },
     { path: '/comments', title: 'Comments',  icon:'ni ni-palette text-orange', class: '', role: ['client'] },
-    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', role: ['ceo', 'manager','client'] },
+    { path: '/leave-request', title: 'Leave request',  icon: 'ni ni-palette text-orange', class: '', role: ['consultant'] },
+    { path: '/leave-list', title: 'Leave list',  icon: 'ni ni-palette text-orange', class: '', role: ['consultant'] },
+    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', role: ['client'] },
     { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '', role: ['client', 'manager'] },
     { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', role: [] },
     { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '', role: ['manager'] },
@@ -31,7 +33,7 @@ export class SidebarComponent implements OnInit {
 
   public menuItems: any[];
   public isCollapsed = true;
-  role = localStorage.getItem('role')
+  role = localStorage.getItem('role');
 
   constructor(private router: Router) { }
 
@@ -43,7 +45,7 @@ export class SidebarComponent implements OnInit {
   }
 
   existRole (roles: string[]) {
-    let _role = roles.find((role: string) => role == this.role)    
+    const _role = roles.find((role: string) => role === this.role);
     if (_role) {
       return true;
     }

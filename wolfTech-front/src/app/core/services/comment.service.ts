@@ -7,14 +7,14 @@ import { environment } from 'src/environments/environment';
 })
 export class CommentService {
 
-  backEndApi = environment.backEndApi
+  backEndApi = environment.backEndApi;
 
   constructor(
     private httpClient: HttpClient
   ) { }
 
   createComment (body: any) {
-    return this.httpClient.post(this.backEndApi + 'commentaires/add', body)
+    return this.httpClient.post(this.backEndApi + 'comments/create', body);
   }
 
   afficherComments (demandeId) {
