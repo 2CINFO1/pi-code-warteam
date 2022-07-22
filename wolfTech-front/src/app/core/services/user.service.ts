@@ -33,7 +33,11 @@ export class UserService {
   }
 
   logout () {
-    localStorage.clear()
+    localStorage.clear();
+  }
+
+  displayUserByRole (role) {
+    return this.httpClient.post(this.backEndApi + 'users/display', role)
   }
   display(body){
     return this.httpClient.post(this.backEndApi + 'users/display', body)

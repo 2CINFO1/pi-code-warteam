@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { HttpClientModule } from '@angular/common/http';import { RouterModule } from '@angular/router';
+import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
@@ -13,9 +14,18 @@ import { IconsComponent } from './components/icons/icons.component';
 import { MapsComponent } from './components/maps/maps.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { CommentsComponent } from './components/comments/comments.component';
+import { LeaveRequestComponent } from './components/leave-request/leave-request.component';
+import { LeaveListComponent } from './components/leave-list/leave-list.component';
+
 import { ProjectsComponent } from './components/projects/projects.component';
+import { DemandesComponent } from './components/demandes/demandes.component';
+import { DemandeDetailsComponent } from './components/demande-details/demande-details.component';
 import { InviteUserComponent } from './components/invite-user/invite-user.component';
 // import { ToastrModule } from 'ngx-toastr';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AddDemandeComponent } from './components/add-demande/add-demande.component';
 
 @NgModule({
   imports: [
@@ -25,7 +35,10 @@ import { InviteUserComponent } from './components/invite-user/invite-user.compon
     HttpClientModule,
     NgbModule,
     ClipboardModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule,
+    PdfViewerModule,
+    NgSelectModule
   ],
   declarations: [
     DashboardComponent,
@@ -34,7 +47,13 @@ import { InviteUserComponent } from './components/invite-user/invite-user.compon
     IconsComponent,
     MapsComponent,
     CommentsComponent,
+    LeaveRequestComponent,
+    LeaveListComponent,
     ProjectsComponent,
+    DemandesComponent,
+    DemandeDetailsComponent,
+    ProjectDetailsComponent,
+    AddDemandeComponent,
     InviteUserComponent
   ]
 })

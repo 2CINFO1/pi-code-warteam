@@ -43,10 +43,10 @@ var storage = multer.diskStorage({
 });
 let upload = multer({ storage });
 //Ajouter commentaire 
-router.post('/add', [
+router.post('/add', auth,[
     check('TextC').isString(),
     check('TextC').isLength({ min: 5 })
-], auth, async (req, res) => {
+], async (req, res) => {
     // const errors = validationResult(req);
     let confirm = false;
     let words = req.body.TextC.split(" ")
@@ -54,15 +54,15 @@ router.post('/add', [
     for (i = 0; i < badwords.length; i++) {
         if (badwords[i].indexOf(words) !== -1)
             confirm = true;
-            textC.delete();
+            // textC.delete();
         //textC.delete();
 
         break;
     }
     if (confirm) {
         const mailData = {
-            from: "aymen.neji@esprit.com", // sender address
-            to: "hamzarahali61@gmail.com", // list of receivers(req.user.email)
+            from: "hamzarahali61@gmail.com", // sender address
+            to: "aymen.neji2018@gmail.com", // list of receivers(req.user.email)
             subject: "Bad words ",
             text: "You are not allowed to send badwords here",
             html: "<h3>You are not allowed to send badwords here</h3>"
@@ -84,7 +84,8 @@ router.post('/add', [
     var c = new Commentaire({
         textC: req.body.TextC,
         Reponse: rep,
-        file: req.file.path
+        user: req.user.user_id,
+        demande : req.body.demande
     });
     c.save();
     res.json(c)
@@ -101,8 +102,8 @@ router.get('/delete/:_id', async (req, res) => {
     res.json('delete success')
 
 });
-router.get('/afficher', async (req, res) => {
-    let commentaire = await Commentaire.find();
+router.get('/afficher/:_id', async (req, res) => {
+    let commentaire = await Commentaire.find({demande: req.params._id}).populate(['user', 'demande']);
     res.json(commentaire)
 });
 router.post('/update/:_id', async (req, res) => {
