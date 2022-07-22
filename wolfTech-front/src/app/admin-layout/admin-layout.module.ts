@@ -17,6 +17,14 @@ import { CommentsComponent } from './components/comments/comments.component';
 import { LeaveRequestComponent } from './components/leave-request/leave-request.component';
 import { LeaveListComponent } from './components/leave-list/leave-list.component';
 
+import { ProjectsComponent } from './components/projects/projects.component';
+import { DemandesComponent } from './components/demandes/demandes.component';
+import { DemandeDetailsComponent } from './components/demande-details/demande-details.component';
+// import { ToastrModule } from 'ngx-toastr';
+import { PdfViewerModule } from 'ng2-pdf-viewer';
+import { ProjectDetailsComponent } from './components/project-details/project-details.component';
+import { NgSelectModule } from '@ng-select/ng-select';
+import { AddDemandeComponent } from './components/add-demande/add-demande.component';
 
 @NgModule({
   imports: [
@@ -26,8 +34,10 @@ import { LeaveListComponent } from './components/leave-list/leave-list.component
     HttpClientModule,
     NgbModule,
     ClipboardModule,
+    ReactiveFormsModule,
     FormsModule,
-    ReactiveFormsModule
+    PdfViewerModule,
+    NgSelectModule
   ],
   declarations: [
     DashboardComponent,
@@ -38,6 +48,11 @@ import { LeaveListComponent } from './components/leave-list/leave-list.component
     CommentsComponent,
     LeaveRequestComponent,
     LeaveListComponent,
+    ProjectsComponent,
+    DemandesComponent,
+    DemandeDetailsComponent,
+    ProjectDetailsComponent,
+    AddDemandeComponent
   ]
 })
 

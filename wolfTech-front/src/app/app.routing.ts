@@ -8,6 +8,7 @@ import { HomePageComponent } from './home-page/home-page.component';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { AuthGuardService } from './core/services/auth-guard.service';
+import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 
 const routes: Routes =[
   {
@@ -27,16 +28,18 @@ const routes: Routes =[
     canActivate: [AuthGuardService] 
   },
   {
+    path: '',
+    component: AuthLayoutComponent,
+    children: [
+      {
+        path: '',
+        loadChildren: () => import('../app/auth-layout/auth-layout.module').then(m => m.AuthLayoutModule)
+      }
+    ]
+  },
+  {
     path: 'home-page',
     component: HomePageComponent
-  },
-  {
-    path: 'login',
-    component: LoginComponent
-  },
-  {
-    path: 'register',
-    component: RegisterComponent
   },
   {
     path: '**',

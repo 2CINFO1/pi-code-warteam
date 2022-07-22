@@ -40,8 +40,8 @@ router.post('/add', async (req, res) => {
         let T = await Tache.create({
             Nom: req.body.Nom,
             Description: req.body.Description,
-            Date_Debut: req.body.Date_Debut,
-            Date_Fin: req.body.Date_Fin
+            Date_Debut: req.body.Date_Debut ?? '',
+            Date_Fin: req.body.Date_Fin ?? ''
         });
         projet.Taches.push(T)
         projet.save()

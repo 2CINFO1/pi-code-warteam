@@ -10,16 +10,18 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '', role: ['ceo', 'manager'] },
-    { path: '/comments', title: 'Comments',  icon: 'ni ni-palette text-orange', class: '', role: ['client'] },
+    { path: '/demandes', title: 'Demandes',  icon: 'ni-tv-2 text-primary', class: '', role: ['ceo', 'manager'] },
+    { path: '/create-demande', title: 'Create Demande',  icon: 'ni-tv-2 text-primary', class: '', role: ['client'] },
+    { path: '/projects', title: 'Projects',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager', 'consultant'] },
+    { path: '/comments', title: 'Comments',  icon:'ni ni-palette text-orange', class: '', role: ['client'] },
     { path: '/leave-request', title: 'Leave request',  icon: 'ni ni-palette text-orange', class: '', role: ['consultant'] },
     { path: '/leave-list', title: 'Leave list',  icon: 'ni ni-palette text-orange', class: '', role: ['consultant'] },
-
-    { path: '/icons', title: 'Icons',  icon: 'ni-planet text-blue', class: '', role: ['client'] },
-    { path: '/maps', title: 'Maps',  icon: 'ni-pin-3 text-orange', class: '', role: ['client', 'manager'] },
-    { path: '/user-profile', title: 'User profile',  icon: 'ni-single-02 text-yellow', class: '', role: [] },
-    { path: '/tables', title: 'Tables',  icon: 'ni-bullet-list-67 text-red', class: '', role: [] },
-    { path: '/login', title: 'Login',  icon: 'ni-key-25 text-info', class: '', role: [] },
-    { path: '/register', title: 'Register',  icon: 'ni-circle-08 text-pink', class: '', role: [] }
+    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', role: ['client'] },
+    { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '', role: ['client', 'manager'] },
+    { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', role: [] },
+    { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '', role: ['manager'] },
+    { path: '/login', title: 'Login',  icon:'ni-key-25 text-info', class: '', role: [] },
+    { path: '/register', title: 'Register',  icon:'ni-circle-08 text-pink', class: '', role: [] }
 ];
 
 @Component({

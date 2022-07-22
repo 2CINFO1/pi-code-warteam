@@ -62,7 +62,7 @@ var storage = multer.diskStorage({
         callback(null, path.join(__dirname + '/uploads/'));
     },
     filename: function (req, file, callback) {
-        callback(null, file.fieldname + '-' + Date.now());
+        callback(null, Date.now()+'-'+file.originalname);
     }
 });
 let upload = multer({ storage });
@@ -78,7 +78,7 @@ router.post('/add',
             Date_Debut: req.body.Date_Debut,
             Date_Fin: req.body.Date_Fin,
             Etat: req.body.Etat,
-            file: req.file.path
+            file: req.file.filename
 
         });
 
@@ -92,7 +92,19 @@ router.post('/add',
         });
     });
 
-
+router.get('/one/:_id', async (req, res) => {
+    try {
+        let projet = await Projet.findOne(req.params).populate({
+            path: 'Taches',
+            populate: {
+                path: 'User'
+            }
+        })
+       res.json(projet)
+    } catch (error) {
+        res.json(error.message)
+    }
+})
 
 
 router.get('/archive/:_id', async (req, res, next) => {

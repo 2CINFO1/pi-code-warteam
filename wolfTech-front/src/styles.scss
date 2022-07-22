@@ -1,3 +1,13 @@
 /* You can add global styles to this file, and also import other style files */
 
 @import "../node_modules/angular-calendar/css/angular-calendar.css";
+
+/* Importing Bootstrap SCSS file. */
+
+@import '~bootstrap/scss/bootstrap';
+@import "~@ng-select/ng-select/themes/default.theme.css";
+// ... or 
+// @import "~@ng-select/ng-select/themes/material.theme.css";
+.modal-backdrop.show {
+    z-index: 0 !important;
+}

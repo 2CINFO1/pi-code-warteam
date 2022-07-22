@@ -223,7 +223,7 @@ router.post("/reset", async(req,res)=>{
   }
 })
 
-router.get("/display", async (req, res) => {
+router.post("/display", async (req, res) => {
   try {
     let roleUser = await Role.findOne({
       name: req.body.role

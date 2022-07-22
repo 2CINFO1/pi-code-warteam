@@ -1,0 +1,76 @@
+<div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
+    <div class="container-fluid">
+        <div class="card shadow card-body">
+            <h5 class="card-title text-center">{{ demande?.title }}</h5>
+            <p class="card-text">{{ demande?.description }}</p>
+            <pdf-viewer
+                [src]="demande?.file"
+                [rotation]="0"
+                [original-size]="false"
+                [show-all]="true"
+                [fit-to-page]="false"
+                [zoom]="1"
+                [zoom-scale]="'page-width'"
+                [stick-to-page]="false"
+                [render-text]="true"
+                [external-link-target]="'blank'"
+                [autoresize]="true"
+                [show-borders]="false"
+                style="width: 100%; height: 600px;"
+            ></pdf-viewer>
+        </div>
+        <!-- AYMEN COMMENTAIRE -->
+        <div class="mt-4 card shadow">
+            <div class="container-fluid"> 
+                <h4>List Comments</h4>
+                <ul>
+                    <li *ngFor="let comment of comments" style="border-bottom: 1px solid; display: flex; justify-content: space-between;">
+                        <span>{{ comment.textC }}</span>
+                        <a (click)="open(responseCommentModal); saveComment(comment)">Response</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="mt-4 card shadow">
+            <div class="container-fluid"> 
+                <h4>Add Comment</h4>
+                <form [formGroup]="commentForm" (ngSubmit)="createComment()" class="container-fluid">
+                    <div class="form-group">
+                        <label>Text</label>
+                        <textarea formControlName="textC" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.textC.errors }"> </textarea>
+                        <div *ngIf="submitted && f.textC.errors" class="invalid-feedback">
+                            <div *ngIf="f.textC.errors.required">Text is required</div>
+                        </div>
+                    </div>
+                    <div class="d-flex justify-content-end">
+                        <button type="submit">Add</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #responseCommentModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Response Comment : {{ comment?.textC }} </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    </div>
+    <div class="modal-body">
+        <li *ngFor="let comment of responses" style="border-bottom: 1px solid; display: flex; justify-content: space-between;">
+            <span>{{ comment.textR }}</span>
+        </li>
+        <form [formGroup]="commentForm" (ngSubmit)="responseComment()" class="container-fluid">
+            <div class="form-group">
+                <label>Text</label>
+                <textarea formControlName="textC" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.textC.errors }"> </textarea>
+                <div *ngIf="submitted && f.textC.errors" class="invalid-feedback">
+                    <div *ngIf="f.textC.errors.required">Text is required</div>
+                </div>
+            </div>
+            <div class="d-flex justify-content-end">
+                <button type="submit">Add</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

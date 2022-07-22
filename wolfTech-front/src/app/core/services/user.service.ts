@@ -28,4 +28,8 @@ export class UserService {
   logout () {
     localStorage.clear();
   }
+
+  displayUserByRole (role) {
+    return this.httpClient.post(this.backEndApi + 'users/display', role)
+  }
 }

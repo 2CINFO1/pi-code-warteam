@@ -16,6 +16,7 @@ import { HashLocationStrategy, LocationStrategy } from '@angular/common';
 import { LoginComponent } from './login/login.component';
 import { RegisterComponent } from './register/register.component';
 import { InterceptorService } from './core/services/interceptor.service';
+import { AuthLayoutComponent } from './auth-layout/auth-layout.component';
 
 
 @NgModule({
@@ -35,8 +36,7 @@ import { InterceptorService } from './core/services/interceptor.service';
     AppComponent,
     AdminLayoutComponent,
     HomePageComponent,
-    LoginComponent,
-    RegisterComponent,
+    AuthLayoutComponent
   ],
   providers: [
     { provide: LocationStrategy, useClass: HashLocationStrategy },

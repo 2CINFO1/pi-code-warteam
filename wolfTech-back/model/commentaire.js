@@ -11,7 +11,11 @@ reponse:[{
 }],
 user:{
     type: mongoose.Schema.ObjectId,
-    ref: 'users'
+    ref: 'user'
+},
+demande: {
+    type: mongoose.Schema.ObjectId,
+    ref: 'demandes'
 },
 
  },
