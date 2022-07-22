@@ -108,6 +108,7 @@ export class ProjectDetailsComponent implements OnInit {
     this.task = task
   }
 
+  public existTask = false;
   addTaskToConsultant () {
     let body = {
       userId: this.affectConsultantForm.value.consultant
@@ -118,6 +119,8 @@ export class ProjectDetailsComponent implements OnInit {
       this.affectConsultantForm.reset()
       this.modalService.dismissAll()
       this.projectDetails(this.projectId)
+    }, err => {
+      this.existTask = true
     })
   }
 }

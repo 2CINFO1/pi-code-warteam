@@ -23,8 +23,8 @@ export class CommentsComponent implements OnInit {
   ngOnInit() {
     this.commentForm = this.formBuilder.group({
       TextC: ['', Validators.required]
-    }),
-    this.afficherComments()//afficher comments
+    })
+    // this.afficherComments()
   }
   
   afficherComments() {
