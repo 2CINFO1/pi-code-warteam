@@ -27,6 +27,6 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'project-details/:id',  component: ProjectDetailsComponent},
     { path: 'demandes',             component: DemandesComponent},
     { path: 'demande-details/:id',  component: DemandeDetailsComponent},
-    { path: 'create-demande',       component: AddDemandeComponent}
+    { path: 'create-demande',       component: AddDemandeComponent},
     { path: 'invite-user', component: InviteUserComponent}
 ];
