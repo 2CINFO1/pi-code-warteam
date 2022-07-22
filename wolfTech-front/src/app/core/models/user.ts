@@ -1,5 +1,4 @@
 export class User {
-
     public id: string;
     public first_name : String;
     public last_name  : String;

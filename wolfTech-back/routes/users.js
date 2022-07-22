@@ -174,9 +174,9 @@ router.post("/login", async (req, res) => {
 });
 
 
-router.get("/current", auth, async (req, res) => {
+router.get("/:userId", auth, async (req, res) => {
   try {
-    res.status(200).json(await User.findById(req.user.user_id))
+    res.status(200).json(await User.findById(req.params.userId))
   } catch (error) {
 
   }

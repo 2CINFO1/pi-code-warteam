@@ -41,7 +41,7 @@ export class LoginComponent implements OnInit {
       this.loginForm.reset()
       localStorage.setItem('role', response.role.name)
       localStorage.setItem('token', response.token)
-      this.userService.user= new User(response);
+      localStorage.setItem('userId', response._id)
       this.router.navigate(['/dashboard'])
     })
   }
