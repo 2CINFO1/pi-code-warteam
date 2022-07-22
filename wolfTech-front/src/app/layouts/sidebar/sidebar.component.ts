@@ -10,11 +10,11 @@ declare interface RouteInfo {
 }
 export const ROUTES: RouteInfo[] = [
     { path: '/dashboard', title: 'Dashboard',  icon: 'ni-tv-2 text-primary', class: '', role: ['ceo', 'manager'] },
-    { path: '/demandes', title: 'Demandes',  icon: 'ni-tv-2 text-primary', class: '', role: ['ceo', 'manager'] },
-    { path: '/create-demande', title: 'Create Demande',  icon: 'ni-tv-2 text-primary', class: '', role: ['client'] },
+    { path: '/demandes', title: 'Demandes',  icon: 'ni ni-spaceship text-orange', class: '', role: ['ceo', 'manager'] },
+    { path: '/create-demande', title: 'Create Demande',  icon: 'ni-tv-2 text-orange', class: '', role: ['client'] },
     { path: '/projects', title: 'Projects',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager', 'consultant'] },
     { path: '/comments', title: 'Comments',  icon:'ni ni-palette text-orange', class: '', role: ['client'] },
-    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', role: ['client'] },
+    { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', role: ['ceo', 'manager','client'] },
     { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '', role: ['client', 'manager'] },
     { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', role: [] },
     { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '', role: ['manager'] },
