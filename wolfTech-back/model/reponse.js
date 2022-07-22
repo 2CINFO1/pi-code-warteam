@@ -8,6 +8,10 @@ commentaire:{
     type: mongoose.Schema.ObjectId,
     ref: 'commentaires'
 },
+user:{
+    type: mongoose.Schema.ObjectId,
+    ref: 'user'
+},
 likes: [
     { type: mongoose.Schema.Types.ObjectId, ref: 'likes' }
 ]

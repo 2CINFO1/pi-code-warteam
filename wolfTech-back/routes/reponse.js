@@ -7,11 +7,13 @@ const bodyParser = require('body-parser');
 const { check, validationResult } = require('express-validator');
 const { response } = require('express');
 const app = express();
+const User = require("../model/user");
+const auth = require("../middleware/auth");
 app.use(bodyParser.json());
 //liste des reponse
 router.get('/:_id', async (req, res)=> {
     try {
-        let responses = await Reponse.find({commentaire: req.params._id})
+        let responses = await Reponse.find({commentaire: req.params._id}).populate('user')
         res.json(responses)
     } catch (error) {
         res.json(error.message)
@@ -19,7 +21,7 @@ router.get('/:_id', async (req, res)=> {
 });
 
 //Ajouter reponse 
-router.post('/add', [
+router.post('/add', auth, [
     check('textR').isString(),
     check('textR').isLength({ min: 5 })
 ],
@@ -28,10 +30,13 @@ router.post('/add', [
         if (!errors.isEmpty()) {
             return res.status(422).json({ errors: errors.array() });
         }
+
+        let user = await User.findOne({_id: req.user.user_id})
         let comment = await commentaire.findById(req.body.commentaire)
         var c = new Reponse({
             textR: req.body.textR,
-            commentaire: comment
+            commentaire: comment,
+            user
         });
         c.save();
         res.json(c)

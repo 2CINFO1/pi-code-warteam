@@ -14,7 +14,7 @@ export class CommentService {
   ) { }
 
   createComment (body: any) {
-    return this.httpClient.post(this.backEndApi + 'comments/create', body);
+    return this.httpClient.post(this.backEndApi + 'commentaires/add', body);
   }
 
   afficherComments (demandeId) {
