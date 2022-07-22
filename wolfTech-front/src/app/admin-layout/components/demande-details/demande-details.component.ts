@@ -90,6 +90,8 @@ export class DemandeDetailsComponent implements OnInit {
 
     this.commentService.createComment(body).subscribe((response: any) => {
       this.comments.unshift(new Comment(response))
+      this.submitted = false;
+      this.commentForm.reset()
     })
   }
 
@@ -112,6 +114,7 @@ export class DemandeDetailsComponent implements OnInit {
 
     this.commentService.createReponseComment(body).subscribe((response: any) => {
       this.responses.unshift(response)
+      this.commentForm.reset()
     })
     
   }
