@@ -1,4 +1,5 @@
 export class User {
+    public id: string;
     public first_name : String;
     public last_name  : String;
     public email : String;
@@ -9,6 +10,7 @@ export class User {
 
 
     constructor (data) {
+        this.id = data._id
         this.first_name = data.first_name;
         this.last_name =data.last_name;
         this.email=data.email;

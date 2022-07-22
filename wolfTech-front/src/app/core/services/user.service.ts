@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from 'src/environments/environment';
 import { HttpClient } from '@angular/common/http';
+import { User } from '../models/user';
 
 @Injectable({
   providedIn: 'root'
@@ -8,7 +9,7 @@ import { HttpClient } from '@angular/common/http';
 export class UserService {
 
   backEndApi = environment.backEndApi
-  user = {};
+  user: User = null;
   
   constructor(
     private httpClient: HttpClient
@@ -20,6 +21,11 @@ export class UserService {
 
   login (body) {
     return this.httpClient.post(this.backEndApi + 'users/login', body)
+  }
+  
+  getUser(userId: string){
+
+    return this.httpClient.get(this.backEndApi + 'users/' +  userId)
   }
 
   isAuthenticated () {

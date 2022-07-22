@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
+import { User } from 'src/app/core/models/user';
 import { UserService } from 'src/app/core/services/user.service';
 
 declare interface RouteInfo {
@@ -32,12 +35,11 @@ export class SidebarComponent implements OnInit {
   public menuItems: any[];
   public isCollapsed = true;
   role = localStorage.getItem('role')
-  user:any = {}
+  user$: Observable<User> = this.userService.getUser(localStorage.getItem('userId')).pipe(map((data) => new User(data)))
 
   constructor(private router: Router, private userService : UserService) { }
 
   ngOnInit() {
-    this.user=this.userService.user;
     this.menuItems = ROUTES.filter(menuItem => menuItem);
     this.router.events.subscribe((event) => {
       this.isCollapsed = true;
