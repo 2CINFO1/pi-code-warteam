@@ -22,7 +22,7 @@
         <div class="mt-4 card shadow">
             <div class="card-header border-0 d-flex align-items-center justify-content-between">
                 <h3 class="mb-0">Tasks List - Project : {{ project?.nom }}</h3>
-                <button type="button" (click)="open(addTaskModal)" *ngIf="role == 'manager' || role =='ceo'">+ Add Task</button>
+                <button type="button" class="btn btn-outline-success" (click)="open(addTaskModal)" *ngIf="role == 'manager' || role =='ceo'">+ Add Task</button>
               </div>
               <div class="table-responsive">
                 <table class="table align-items-center table-flush">
@@ -31,6 +31,7 @@
                       <th scope="col">ID Task </th>
                       <th scope="col">Nom</th>
                       <th scope="col">Consultant</th>
+                      <th scope="col">Date</th>
                       <th scope="col"></th>
                     </tr>
                   </thead>
@@ -43,9 +44,11 @@
                         {{ task.nom }}
                       </td>
                       <td>
-                        {{ task.consultant?.first_name }} {{ task.consultant?.last_name }}</td>
+                        {{ task.consultant?.first_name }} {{ task.consultant?.last_name }}
+                      </td>
+                      <td>{{ task.created_at | date:'medium' }}</td>
                       <td class="text-right">
-                        <div ngbDropdown placement="bottom-right">
+                        <div ngbDropdown placement="bottom-right" *ngIf="role != 'consultant'">
                           <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
                             <i class="fas fa-ellipsis-v"></i>
                           </a>
@@ -59,6 +62,9 @@
                     </tr>
                   </tbody>
                 </table>
+                <div class="card-header border-0 d-flex justify-content-end"  style="margin-bottom: 8px;">
+                  <button type="button" class="btn btn-outline-info" (click)="open(startProject);">Start Project</button>
+                </div>
               </div>
         </div>
     </div>
@@ -113,4 +119,19 @@
       </form>
       <h5 style="color: red" *ngIf="existTask">Consultant Have Task in Dev</h5>
     </div>
+</ng-template>
+
+<!-- MODAL Start Project -->
+<ng-template #startProject let-modal>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Project {{ project.nom }}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <p>Are you sure to start <b>Project : {{ project.nom }}</b></p>
+  </div>
+  <div class="modal-footer">
+    <button type="button" class="btn btn-outline-danger" (click)="modal.dismiss('Cross click')">No</button>
+    <button type="submit" class="btn btn-outline-success" (click)="_startProject()">Start Project</button>
+  </div>
 </ng-template>

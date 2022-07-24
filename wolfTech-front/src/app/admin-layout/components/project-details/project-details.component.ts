@@ -123,4 +123,11 @@ export class ProjectDetailsComponent implements OnInit {
       this.existTask = true
     })
   }
+
+  _startProject () {
+    this.modalService.dismissAll()
+    this.router.navigate(['/timeline-project', this.project.id])
+
+    //
+  }
 }

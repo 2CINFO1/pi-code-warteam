@@ -13,6 +13,7 @@ export class ProjectsComponent implements OnInit {
 
   projects: Project[] = []
   role = localStorage.getItem('role')
+  userId = localStorage.getItem('userId')
 
   constructor(
     private projectService: ProjectService,
@@ -28,11 +29,17 @@ export class ProjectsComponent implements OnInit {
       response.map(project =>  {
         project = new Project(project)
         this.projects.push(project)
-      })
-      
- 
-      console.log(this.projects);
-      
+      })  
+      if (this.role == 'consultant') {
+        let taskByConsultant: Project[] = []
+        for (const project of this.projects) {
+          let tasks = project.tasks.find((task: Task) => task.consultant && task.consultant.id == this.userId )
+          if (tasks) {
+            taskByConsultant.push(project)
+          }
+        }
+        this.projects = taskByConsultant
+      }
     })
   }
 

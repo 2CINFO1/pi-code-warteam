@@ -13,6 +13,7 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
 import { ProjectsComponent } from './components/projects/projects.component';
 import { TablesComponent } from './components/tables/tables.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { TimelineComponent } from './components/timeline/timeline.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -25,6 +26,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'leave-list', component: LeaveListComponent},
     { path: 'projects',             component: ProjectsComponent},
     { path: 'project-details/:id',  component: ProjectDetailsComponent},
+    { path: 'timeline-project/:id', component: TimelineComponent},
     { path: 'demandes',             component: DemandesComponent},
     { path: 'demande-details/:id',  component: DemandeDetailsComponent},
     { path: 'create-demande',       component: AddDemandeComponent},
