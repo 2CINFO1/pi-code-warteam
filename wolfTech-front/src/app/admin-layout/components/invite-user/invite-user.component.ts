@@ -52,6 +52,7 @@ export class InviteUserComponent implements OnInit {
     })
   }
   displayfiltre(){
+    this.users=[];
     this.userService.display({ role: this.searchUser}).subscribe((response: any) => {
       response.user.map(user => {
         user = new User(user)

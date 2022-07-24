@@ -52,7 +52,7 @@ router.post("/register",uploadImg.single('file'),async (req, res) => {
     } = req.body;
 
     let image;
-    if (req.file)  image  = req.file.path;
+    if (req.file)  image  = req.file.filename;
 
 
 
