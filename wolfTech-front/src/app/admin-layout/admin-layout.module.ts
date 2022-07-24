@@ -26,6 +26,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddDemandeComponent } from './components/add-demande/add-demande.component';
+import { LeaveBalanceComponent } from './components/leave-balance/leave-balance.component';
 
 @NgModule({
   imports: [
@@ -54,7 +55,8 @@ import { AddDemandeComponent } from './components/add-demande/add-demande.compon
     DemandeDetailsComponent,
     ProjectDetailsComponent,
     AddDemandeComponent,
-    InviteUserComponent
+    InviteUserComponent,
+    LeaveBalanceComponent
   ]
 })
 
