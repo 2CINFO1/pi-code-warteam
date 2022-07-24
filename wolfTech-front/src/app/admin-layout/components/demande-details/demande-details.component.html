@@ -29,7 +29,11 @@
                         <div>
                             <a class="btn btn-outline-info" (click)="open(responseCommentModal); saveComment(comment)">Response</a>
                             <a class="btn btn-outline-danger" (click)="open(deleteCommentModal);saveComment(comment)" *ngIf="userId == comment.user?.id">Delete</a>
-                            <a class="btn btn-outline-warning" (click)="open(updateCommentModal); _updateComment(comment)" *ngIf="userId == comment.user?.id">Update</a>    
+                            <a class="btn btn-outline-warning" (click)="open(updateCommentModal); _updateComment(comment)" *ngIf="userId == comment.user?.id">Update</a> 
+                            <button class="btn btn-outline-success" (click)="reactionComment(comment)">
+                                <span *ngIf="existUser(comment)">DisLike ({{ comment.likes.length}}) </span>
+                                <span *ngIf="!existUser(comment)">Like ({{ comment.likes.length}}) </span>
+                            </button>
                         </div> 
                     </li>
                 </ul>

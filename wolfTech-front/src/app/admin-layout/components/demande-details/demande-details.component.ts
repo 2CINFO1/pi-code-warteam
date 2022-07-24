@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from 'src/app/core/models/comment';
 import { Demande } from 'src/app/core/models/demande';
+import { User } from 'src/app/core/models/user';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { DemandeService } from 'src/app/core/services/demande.service';
 
@@ -90,7 +91,7 @@ export class DemandeDetailsComponent implements OnInit {
         return;
     }
 
-    let body = {
+    let body = {  
       TextC: this.commentForm.value.textC,
       demande: this.demandeId
     } 
@@ -150,13 +151,27 @@ export class DemandeDetailsComponent implements OnInit {
     })
   }
 
-  updateComment () {
-    console.log(this.updateCommentForm.value, this.comment);
-    
+  updateComment () {    
     this.comment.textC = this.updateCommentForm.value.textC
-
     this.commentService.updateComment(this.comment.id, this.comment).subscribe((response: any) => {
       this.modalService.dismissAll()
     })
+  }
+
+  existUser (comment: Comment ) {
+    let userExist = comment.likes.find((user : User)  => user.id == this.userId)
+    return userExist ? true : false
+  }
+
+  reactionComment (comment: Comment) {
+    if (this.existUser(comment)) {
+      this.commentService.createReactionDislike(comment.id).subscribe((response: any)  => {
+        comment = new Comment(response)
+      })
+    } else {
+      this.commentService.createReactionLike(comment.id).subscribe((response: any)  => {
+        comment = new Comment(response)
+      })
+    }
   }
 }

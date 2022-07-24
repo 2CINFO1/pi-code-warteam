@@ -37,7 +37,19 @@ export class CommentService {
     return this.httpClient.get(this.backEndApi + 'commentaires/delete/' + commentId)
   }
 
-  updateComment (commentId, body) {
+  updateComment (commentId, body) { 
     return this.httpClient.post(this.backEndApi + 'commentaires/update/' + commentId, body)
+  }
+
+  createReactionLike (commentId) {
+    return this.httpClient.post(this.backEndApi + 'commentaires/reaction/like/' + commentId, {})
+  }
+
+  createReactionDislike (commentId) {
+    return this.httpClient.post(this.backEndApi + 'commentaires/reaction/dislike/' + commentId, {})
+  }
+  
+  verifyUser (commentId) {
+    return this.httpClient.get(this.backEndApi + 'reaction/verify-user/' + commentId)
   }
 }
