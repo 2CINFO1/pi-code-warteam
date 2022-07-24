@@ -8,6 +8,7 @@ export class Task {
     public date_debut: string;
     public date_fin: string;
     public etat: string;
+    public priorite : string
     public consultant: User
     public created_at: string
 
@@ -17,6 +18,7 @@ export class Task {
         this.description = data.Description
         this.date_debut = data.Date_Debut
         this.date_fin = data.Date_Fin
+        this.priorite =data.Priorite
         this.etat = data.Etat
         this.consultant = data.User ? new User(data.User) : null
         this.created_at = data.created_at
