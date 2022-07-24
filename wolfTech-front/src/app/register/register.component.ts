@@ -25,7 +25,7 @@ export class RegisterComponent implements OnInit {
         last_name: ['', Validators.required],
         email: ['', [Validators.required, Validators.email]],
         password: ['', [Validators.required, Validators.minLength(6)]],
-        image: ['',[Validators.required]]
+        // image: ['',[Validators.required]]
     })
   }
 
@@ -40,7 +40,7 @@ export class RegisterComponent implements OnInit {
 
 
     let formData = new FormData();
-    formData.append('file', this.registerForm.get('image').value)
+    // formData.append('file', this.registerForm.get('image').value)
     formData.append('first_name', this.registerForm.get('first_name').value)
     formData.append('last_name', this.registerForm.get('last_name').value)
     formData.append('email', this.registerForm.get('email').value)

@@ -24,11 +24,11 @@ export class CommentsComponent implements OnInit {
     this.commentForm = this.formBuilder.group({
       TextC: ['', Validators.required]
     })
-    //this.afficherComments()
+    this.afficherComments()
   }
   
   afficherComments() {
-    this.commentService.afficherComments(2).subscribe((response: any) => {
+    this.commentService.readAllComments().subscribe((response: any) => {
       response.map(comment => {
         comment = new Comment(comment)
         this.comments.push(comment)
