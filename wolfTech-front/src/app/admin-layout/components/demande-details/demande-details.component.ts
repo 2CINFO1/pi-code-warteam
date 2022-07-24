@@ -15,13 +15,16 @@ import { DemandeService } from 'src/app/core/services/demande.service';
 export class DemandeDetailsComponent implements OnInit {
 
   demande: Demande;
+  comment: Comment
   demandeId = this.activatedRoute.snapshot.paramMap.get('id');
   commentForm: FormGroup
+  updateCommentForm: FormGroup
   submitted = false;
   comments: Comment[] = []
   closeResult = ''
-  comment: Comment
   responses: any[] = []
+  badWords = false;
+  userId = localStorage.getItem('userId')
 
   // responses: 
   constructor(
@@ -37,6 +40,9 @@ export class DemandeDetailsComponent implements OnInit {
     this.demandeDetails(this.demandeId)
     this.readCommentsDemande()
     this.commentForm = this.formBuilder.group({
+      textC: ['', Validators.required]
+    })
+    this.updateCommentForm = this.formBuilder.group({
       textC: ['', Validators.required]
     })
   }
@@ -77,6 +83,7 @@ export class DemandeDetailsComponent implements OnInit {
   get f() { return this.commentForm.controls; }
 
   createComment () {
+    this.badWords = false
     this.submitted = true;
 
     if (this.commentForm.invalid) {
@@ -89,15 +96,26 @@ export class DemandeDetailsComponent implements OnInit {
     } 
 
     this.commentService.createComment(body).subscribe((response: any) => {
-      this.comments.unshift(new Comment(response))
+      this.comments.push(new Comment(response))
       this.submitted = false;
       this.commentForm.reset()
+    }, err => {
+      this.submitted = false;
+      this.commentForm.reset()
+      this.badWords = true
     })
   }
 
   saveComment (comment) {
     this.comment = comment
     this.readReponses()
+  }
+
+  _updateComment (comment: Comment) {
+    this.comment  = comment
+    this.updateCommentForm.patchValue({
+      textC: this.comment.textC
+    })
   }
 
   readReponses () {
@@ -117,5 +135,28 @@ export class DemandeDetailsComponent implements OnInit {
       this.commentForm.reset()
     })
     
+  }
+
+  openDeleteCommentModal (comment ) {
+    this.comment = comment
+    this.open('deleteCommentModal')
+  }
+
+  deleteComment (comment: Comment) {
+    this.commentService.deleteComment(comment.id).subscribe((response: any) => {
+      this.modalService.dismissAll()
+      this.comments = []
+      this.readCommentsDemande()
+    })
+  }
+
+  updateComment () {
+    console.log(this.updateCommentForm.value, this.comment);
+    
+    this.comment.textC = this.updateCommentForm.value.textC
+
+    this.commentService.updateComment(this.comment.id, this.comment).subscribe((response: any) => {
+      this.modalService.dismissAll()
+    })
   }
 }
