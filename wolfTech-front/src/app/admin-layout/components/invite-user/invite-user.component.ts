@@ -14,6 +14,7 @@ export class InviteUserComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   searchUser : string;
+  dyn : string;
   users : User[] = []
   constructor(
     private formBuilder: FormBuilder,
@@ -58,7 +59,13 @@ export class InviteUserComponent implements OnInit {
         user = new User(user)
         this.users.push(user)
       })
+      this.affect();
     })
   }
-
+  affect(){
+    this.dyn=this.searchUser;
+  }
+  block(){
+    
+  }
 }
