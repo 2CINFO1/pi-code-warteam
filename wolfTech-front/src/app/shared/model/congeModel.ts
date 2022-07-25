@@ -1,3 +1,4 @@
+import { User } from 'src/app/core/models/user';
 import { UserModel } from './userModel';
 
 export class LeaveModel {
@@ -10,7 +11,7 @@ export class LeaveModel {
   status: string;
   approved: boolean;
   denied: boolean;
-  user: UserModel;
+  user: User;
   constructor (data) {
     console.log(data);
 
@@ -23,7 +24,7 @@ export class LeaveModel {
     this.status = data.status;
     this.approved = data.approved;
     this.denied = data.denied;
-    this.user = data.user;
+    this.user = new User(data.user);
   }
 }
 

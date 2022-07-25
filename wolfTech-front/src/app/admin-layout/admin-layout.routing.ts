@@ -15,6 +15,7 @@ import { TablesComponent } from './components/tables/tables.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
+import { PrimeComponent } from './components/prime/prime.component';
 
 export const AdminLayoutRoutes: Routes = [
     { path: 'dashboard',      component: DashboardComponent },
@@ -32,5 +33,7 @@ export const AdminLayoutRoutes: Routes = [
     { path: 'demande-details/:id',  component: DemandeDetailsComponent},
     { path: 'create-demande',       component: AddDemandeComponent},
     { path: 'invite-user', component: InviteUserComponent},
-    { path: 'my-leaves', component: MyLeavesComponent}
+    { path: 'my-leaves', component: MyLeavesComponent},
+    { path: 'primes', component: PrimeComponent},
+
 ];

@@ -12,6 +12,7 @@ const userSchema = new mongoose.Schema({
         type: mongoose.Schema.ObjectId,
         ref: 'roles' //le nom de la collection dans la bade de donnes,
     },
+    leave_balance: { type: Number, default: 0 },
     created_at: { type: Date, required: true, default: Date.now }
 });
 

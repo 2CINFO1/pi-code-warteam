@@ -137,12 +137,23 @@ router.post("/updateStatus", async(req, res) => {
                 to: conge.user.email,
                 subject: conge.leave_subject + " request",
 
-                text: "Dear",
-                html: "I'm writing to ask for " + conge.leave_subject + " in advance of my entitlements." +
+                text: "Dear Mr ",
+                html: "Dear Mr " + conge.user.first_name + " " + conge.user.last_name + "<br>" +
+                    "Your " + conge.leave_subject + " has been approved." +
                     "<br>" +
+                    "Sincerely",
+            }
+        } else if (conge.denied) {
+            // console.log(conge);
+            var mailOptions = {
+                from: "wolf.tech77777@gmail.com",
+                to: conge.user.email,
+                subject: conge.leave_subject + " request",
 
-                    "I'd like to take my leave between the following dates " + conge.start_date + " and " +
-                    conge.end_date + ".<br>" +
+                text: "Dear Mr " + conge.user.first_name,
+                html: "Dear Mr " + conge.user.first_name + " " + conge.user.last_name + "<br>" +
+                    "Your " + conge.leave_subject + " has been rejected." +
+                    "<br>" +
                     "Sincerely",
             };
 

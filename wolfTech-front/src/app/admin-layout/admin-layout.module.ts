@@ -29,6 +29,7 @@ import { AddDemandeComponent } from './components/add-demande/add-demande.compon
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { LeaveBalanceComponent } from './components/leave-balance/leave-balance.component';
 import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
+import { PrimeComponent } from './components/prime/prime.component';
 
 @NgModule({
   imports: [
@@ -60,7 +61,8 @@ import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
     InviteUserComponent,
     TimelineComponent,
     LeaveBalanceComponent,
-    MyLeavesComponent
+    MyLeavesComponent,
+    PrimeComponent
   ]
 })
 

@@ -19,11 +19,13 @@ export const ROUTES: RouteInfo[] = [
     { path: '/projects', title: 'Projects',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager', 'consultant'] },
     { path: '/comments', title: 'Comments',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager', 'client', 'consultant'] },
     { path: '/leave-request', title: 'Leave request',  icon: 'ni ni-palette text-orange', class: '', role: ['consultant'] },
-    { path: '/leave-list', title: 'Leave list',  icon: 'ni ni-palette text-orange', class: '', role: ['ceo', 'manager'] },
+    { path: '/leave-list', title: 'Leave list',  icon: 'ni ni-align-left-2', class: '', role: ['ceo', 'manager'] },
+    { path: '/my-leaves', title: 'My Leaves',  icon:'ni ni-ui-04', class: '', role: ['consultant', 'manager'] },
+    { path: '/primes', title: 'Primes',  icon:'ni ni-diamond', class: '', role: ['consultant', 'manager'] },
     { path: '/invite-user', title: 'Invite User',  icon:'ni ni-palette text-orange', class: '', role: ['ceo', 'manager'] },
     { path: '/icons', title: 'Icons',  icon:'ni-planet text-blue', class: '', role: ['client'] },
     { path: '/maps', title: 'Maps',  icon:'ni-pin-3 text-orange', class: '', role: ['client', 'manager'] },
-    { path: '/my-leaves', title: 'My Leaves',  icon:'ni-pin-3 text-orange', class: '', role: ['consultant', 'manager'] },
+
     { path: '/user-profile', title: 'User profile',  icon:'ni-single-02 text-yellow', class: '', role: ['ceo', 'client', 'manager', 'consultant'] },
     { path: '/tables', title: 'Tables',  icon:'ni-bullet-list-67 text-red', class: '', role: ['manager'] }
 ];
