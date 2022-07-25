@@ -247,4 +247,17 @@ router.post('/update', auth, async (req, res) => {
   res.json(user)
 })
 
+
+router.post('/update/:_id', uploadImg.single('file') , async (req, res) => {
+  let user = await User.findById(req.params);
+  user.first_name = req.body.first_name;
+  user.last_name = req.body.last_name;
+  if (req.file){
+  user.image = req.file.filename }
+  user.save()
+  res.json(user)
+})
+
+
+
 module.exports = router;
