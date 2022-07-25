@@ -4,6 +4,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { ModalDismissReasons, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Comment } from 'src/app/core/models/comment';
 import { Demande } from 'src/app/core/models/demande';
+import { User } from 'src/app/core/models/user';
 import { CommentService } from 'src/app/core/services/comment.service';
 import { DemandeService } from 'src/app/core/services/demande.service';
 
@@ -15,13 +16,16 @@ import { DemandeService } from 'src/app/core/services/demande.service';
 export class DemandeDetailsComponent implements OnInit {
 
   demande: Demande;
+  comment: Comment
   demandeId = this.activatedRoute.snapshot.paramMap.get('id');
   commentForm: FormGroup
+  updateCommentForm: FormGroup
   submitted = false;
   comments: Comment[] = []
   closeResult = ''
-  comment: Comment
   responses: any[] = []
+  badWords = false;
+  userId = localStorage.getItem('userId')
 
   // responses: 
   constructor(
@@ -37,6 +41,9 @@ export class DemandeDetailsComponent implements OnInit {
     this.demandeDetails(this.demandeId)
     this.readCommentsDemande()
     this.commentForm = this.formBuilder.group({
+      textC: ['', Validators.required]
+    })
+    this.updateCommentForm = this.formBuilder.group({
       textC: ['', Validators.required]
     })
   }
@@ -77,27 +84,39 @@ export class DemandeDetailsComponent implements OnInit {
   get f() { return this.commentForm.controls; }
 
   createComment () {
+    this.badWords = false
     this.submitted = true;
 
     if (this.commentForm.invalid) {
         return;
     }
 
-    let body = {
+    let body = {  
       TextC: this.commentForm.value.textC,
       demande: this.demandeId
     } 
 
     this.commentService.createComment(body).subscribe((response: any) => {
-      this.comments.unshift(new Comment(response))
+      this.comments.push(new Comment(response))
       this.submitted = false;
       this.commentForm.reset()
+    }, err => {
+      this.submitted = false;
+      this.commentForm.reset()
+      this.badWords = true
     })
   }
 
   saveComment (comment) {
     this.comment = comment
     this.readReponses()
+  }
+
+  _updateComment (comment: Comment) {
+    this.comment  = comment
+    this.updateCommentForm.patchValue({
+      textC: this.comment.textC
+    })
   }
 
   readReponses () {
@@ -117,5 +136,42 @@ export class DemandeDetailsComponent implements OnInit {
       this.commentForm.reset()
     })
     
+  }
+
+  openDeleteCommentModal (comment ) {
+    this.comment = comment
+    this.open('deleteCommentModal')
+  }
+
+  deleteComment (comment: Comment) {
+    this.commentService.deleteComment(comment.id).subscribe((response: any) => {
+      this.modalService.dismissAll()
+      this.comments = []
+      this.readCommentsDemande()
+    })
+  }
+
+  updateComment () {    
+    this.comment.textC = this.updateCommentForm.value.textC
+    this.commentService.updateComment(this.comment.id, this.comment).subscribe((response: any) => {
+      this.modalService.dismissAll()
+    })
+  }
+
+  existUser (comment: Comment ) {
+    let userExist = comment.likes.find((user : User)  => user.id == this.userId)
+    return userExist ? true : false
+  }
+
+  reactionComment (comment: Comment) {
+    if (this.existUser(comment)) {
+      this.commentService.createReactionDislike(comment.id).subscribe((response: any)  => {
+        comment = new Comment(response)
+      })
+    } else {
+      this.commentService.createReactionLike(comment.id).subscribe((response: any)  => {
+        comment = new Comment(response)
+      })
+    }
   }
 }

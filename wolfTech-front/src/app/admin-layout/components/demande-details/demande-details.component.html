@@ -24,9 +24,17 @@
             <div class="container-fluid"> 
                 <h4>List Comments</h4>
                 <ul>
-                    <li *ngFor="let comment of comments" style="border-bottom: 1px solid; display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
+                    <li *ngFor="let comment of comments" style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 4px;">
                         <span><b>{{ comment.user?.first_name }} {{ comment.user?.last_name }}</b>  :  {{ comment.textC }}</span>
-                        <a class="btn btn-outline-info" (click)="open(responseCommentModal); saveComment(comment)">Response</a>
+                        <div>
+                            <a class="btn btn-outline-info" (click)="open(responseCommentModal); saveComment(comment)">Response</a>
+                            <a class="btn btn-outline-danger" (click)="open(deleteCommentModal);saveComment(comment)" *ngIf="userId == comment.user?.id">Delete</a>
+                            <a class="btn btn-outline-warning" (click)="open(updateCommentModal); _updateComment(comment)" *ngIf="userId == comment.user?.id">Update</a> 
+                            <button class="btn btn-outline-success" (click)="reactionComment(comment)">
+                                <span *ngIf="existUser(comment)">DisLike ({{ comment.likes.length}}) </span>
+                                <span *ngIf="!existUser(comment)">Like ({{ comment.likes.length}}) </span>
+                            </button>
+                        </div> 
                     </li>
                 </ul>
             </div>
@@ -47,6 +55,7 @@
                     <div class="d-flex justify-content-end" style="margin-bottom: 16px;">
                         <button type="submit" class="btn btn-outline-success">Add</button>
                     </div>
+                    <div style="color: red" *ngIf="badWords">Bad words</div>
                 </form>
             </div>
         </div>
@@ -74,5 +83,42 @@
                 <button type="submit" class="btn btn-outline-success">Add</button>
             </div>
         </form>
+    </div>
+</ng-template>
+
+<ng-template #deleteCommentModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Delete Comment : {{ comment?.textC }} </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    </div>
+    <div class="modal-body">
+            <p>Are you sure to delete this comment ?</p>
+            <div class="d-flex justify-content-end">
+                <button type="submit" class="btn btn-outline-danger" (click)="modal.dismiss('Cross click')">No</button>
+                <button type="submit" class="btn btn-outline-success" (click)="deleteComment(comment)">Yes</button> 
+            </div>
+    </div>
+</ng-template>
+
+<ng-template #updateCommentModal let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Update Comment : {{ comment?.textC }} </h4>
+      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+    </div>
+    <div class="modal-body">
+            <form [formGroup]="updateCommentForm" (ngSubmit)="updateComment()" class="container-fluid">
+                <div class="form-group">
+                    <label>Text</label>
+                    <textarea formControlName="textC" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.textC.errors }"> </textarea>
+                    <div *ngIf="submitted && f.textC.errors" class="invalid-feedback">
+                        <div *ngIf="f.textC.errors.required">Text is required</div>
+                    </div>
+                </div>
+                <div class="d-flex justify-content-end">
+                    <button type="submit" class="btn btn-outline-danger" (click)="modal.dismiss('Cross click')">No</button>
+                    <button type="submit" class="btn btn-outline-success">Update</button>
+                </div>
+                <div style="color: red" *ngIf="badWords">Bad words</div>
+            </form>
     </div>
 </ng-template>

@@ -3,13 +3,13 @@ const app = express();
 const reaction = require("../model/reaction");
 const router = require('express').Router();
 const commentaire = require("../model/commentaire")
+const auth = require("../middleware/auth");
 
-router.post('/like', async (req, res) => {
+router.post('/like', auth, async (req, res) => {
     console.log(req.body);
     try {
         var L = await new reaction({
-            type: req.body.type,
-            user: req.body.user,
+            user: req.user.user_id,
             commentaire: req.body.commentaire
         });
         L.save()
@@ -44,4 +44,23 @@ router.get("/stats", async (req, res) => {
     }
 }
 )
+
+router.get('/verify-user/:_id',auth, async (req, res) => {
+    try {
+        let commentaire  = req.params._id
+        let user= req.user.user_id
+        let reactionExist = await reaction.findOne({
+            commentaire,
+            user
+        })
+        if (reactionExist) {
+            res.json(true)
+        } else {
+            res.json(false)
+        }
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+})
+
 module.exports = router;
