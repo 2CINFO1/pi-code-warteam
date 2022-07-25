@@ -39,6 +39,10 @@ export class LeaveRequestService {
      return this.httpClient.post<LeaveModel[]>(this.backEndApi + 'conges/updateStatus', leave);
     }
 
+    deleteLeave (id: String) {
+      console.log(id)
+      return this.httpClient.get(this.backEndApi + 'conges/delete/' + id, {});
+    }
     processError(err: any) {
       let message = '';
       if (err.error instanceof ErrorEvent) {

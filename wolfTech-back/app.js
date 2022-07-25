@@ -39,6 +39,8 @@ var dirProjets = path.join(__dirname, 'routes/projets');
 app.use(express.static(dirProjets));
 var dirUploads = path.join(__dirname, 'routes/uploads');
 app.use(express.static(dirUploads));
+var dirUsers = path.join(__dirname, 'uploads');
+app.use(express.static(dirUsers));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);

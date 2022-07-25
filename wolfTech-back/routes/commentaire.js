@@ -80,11 +80,12 @@ router.post('/add', auth,[
 
 
     // upload.single('file'), function (req, res) { }
+    let user = await User.findOne({_id: req.user.user_id})
     let rep = await Reponse.findById(req.body.Reponse)
     var c = new Commentaire({
         textC: req.body.TextC,
         Reponse: rep,
-        user: req.user.user_id,
+        user,
         demande : req.body.demande
     });
     c.save();
@@ -103,7 +104,7 @@ router.get('/delete/:_id', async (req, res) => {
 
 });
 router.get('/afficher/:_id', async (req, res) => {
-    let commentaire = await Commentaire.find({demande: req.params._id}).populate(['user', 'demande']);
+    let commentaire = await Commentaire.find({demande: req.params._id}).populate(['user', 'demande', 'likes']);
     res.json(commentaire)
 });
 router.post('/update/:_id', async (req, res) => {
@@ -124,4 +125,21 @@ router.post('/update/:_id', async (req, res) => {
     res.send('comment saved');
   });
   //app.listen(3000, () => console.log('server started'));*/
+
+router.post('/reaction/like/:_id', auth, async (req, res)  => {
+    let commentaire = await Commentaire.findOne(req.params).populate('user')
+    let user = await User.findOne({_id: req.user.user_id});
+    commentaire.likes.push(user)
+    commentaire.save()
+    res.json(commentaire)
+})
+
+router.post('/reaction/dislike/:_id', auth, async (req, res)  => {
+    let commentaire = await Commentaire.findOne(req.params).populate('user')
+    let indexUser = commentaire.likes.findIndex(user => user._id == req.user.user_id)
+    commentaire.likes.splice(indexUser, 1)
+    commentaire.save()
+    res.json(commentaire)
+})
+
 module.exports = router

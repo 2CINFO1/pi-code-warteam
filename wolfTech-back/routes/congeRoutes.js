@@ -1,7 +1,6 @@
 var express = require('express');
 var router = express.Router();
 var Conge = require('../model/conge');
-//const auth = require("../middleware/auth");
 var multer = require('multer');
 var bcrypt = require('bcryptjs');
 var jwt = require("jsonwebtoken");
@@ -39,11 +38,11 @@ router.get('/display/user', async(req, res) => {
 
 ////////////////////////////
 
-router.post('/add', /* auth,*/ async(req, res, next) => {
+router.post('/add', auth, async(req, res, next) => {
     let conge = await Conge.create({
         ...req.body,
-        status: "pending",
-        user: '62c1775c52d6fb1a1892f53a' // req.user.user_id
+        user: req.user.user_id,
+        status: "pending"
     });
     if (conge.status == 'pending') {
         var mailOptions = {

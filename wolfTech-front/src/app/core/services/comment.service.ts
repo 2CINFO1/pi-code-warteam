@@ -14,7 +14,11 @@ export class CommentService {
   ) { }
 
   createComment (body: any) {
-    return this.httpClient.post(this.backEndApi + 'comments/create', body);
+    return this.httpClient.post(this.backEndApi + 'commentaires/add', body);
+  }
+
+  readAllComments() {
+    return this.httpClient.get(this.backEndApi + 'commentaires')
   }
 
   afficherComments (demandeId) {
@@ -27,5 +31,25 @@ export class CommentService {
 
   readResponsesByComment (commentId) {
     return this.httpClient.get(this.backEndApi + 'reponses/' + commentId)
+  }
+
+  deleteComment (commentId) {
+    return this.httpClient.get(this.backEndApi + 'commentaires/delete/' + commentId)
+  }
+
+  updateComment (commentId, body) { 
+    return this.httpClient.post(this.backEndApi + 'commentaires/update/' + commentId, body)
+  }
+
+  createReactionLike (commentId) {
+    return this.httpClient.post(this.backEndApi + 'commentaires/reaction/like/' + commentId, {})
+  }
+
+  createReactionDislike (commentId) {
+    return this.httpClient.post(this.backEndApi + 'commentaires/reaction/dislike/' + commentId, {})
+  }
+  
+  verifyUser (commentId) {
+    return this.httpClient.get(this.backEndApi + 'reaction/verify-user/' + commentId)
   }
 }

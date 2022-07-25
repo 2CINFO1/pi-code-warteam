@@ -76,10 +76,13 @@
                   <span class="input-group-text"><i class="ni ni-lock-circle-open"></i></span>
                 </div>
                 
-                <app-file-upload formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"></app-file-upload>
+                <div>
+                  <input type="file" class="form-control" (change)="uploadFiles($event.target.files)">
+                </div>
+                <!-- <app-file-upload formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }"></app-file-upload>
                 <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
                   <div *ngIf="f.image.errors.required">please inserte your picture</div>
-                </div>
+                </div> -->
               </div>
             </div>
             <div class="text-muted font-italic"><small>password strength: <span class="text-success font-weight-700">strong</span></small></div>

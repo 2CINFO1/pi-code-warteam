@@ -33,13 +33,14 @@ export class ProjectDetailsComponent implements OnInit {
     private formBuilder: FormBuilder,
     private userService: UserService
   ) { }
-
+  
   ngOnInit(): void {
     this.projectDetails(this.projectId)
     this.readConsultants()
     this.taskForm = this.formBuilder.group({
       nom: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      priorite: ['', Validators.required]
     })
     this.affectConsultantForm = this.formBuilder.group({
       consultant: ['', Validators.required]
@@ -91,6 +92,7 @@ export class ProjectDetailsComponent implements OnInit {
     let body = {
       Nom: this.taskForm.value.nom,
       Description: this.taskForm.value.description,
+      Priorite : this.taskForm.value.priorite,
       Projet: this.projectId
     }
 
@@ -106,8 +108,10 @@ export class ProjectDetailsComponent implements OnInit {
 
   saveTask(task) {
     this.task = task
+    console.log(task.priorite)
   }
 
+  public existTask = false;
   addTaskToConsultant () {
     let body = {
       userId: this.affectConsultantForm.value.consultant
@@ -118,6 +122,15 @@ export class ProjectDetailsComponent implements OnInit {
       this.affectConsultantForm.reset()
       this.modalService.dismissAll()
       this.projectDetails(this.projectId)
+    }, err => {
+      this.existTask = true
     })
+  }
+
+  _startProject () {
+    this.modalService.dismissAll()
+    this.router.navigate(['/timeline-project', this.project.id])
+
+    //
   }
 }

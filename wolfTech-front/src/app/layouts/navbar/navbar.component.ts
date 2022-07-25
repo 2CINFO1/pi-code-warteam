@@ -3,6 +3,9 @@ import { ROUTES } from '../sidebar/sidebar.component';
 import { Location, LocationStrategy, PathLocationStrategy } from '@angular/common';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/core/services/user.service';
+import { Observable } from 'rxjs';
+import { map } from 'rxjs/operators'
+import { User } from 'src/app/core/models/user';
 
 @Component({
   selector: 'app-navbar',
@@ -13,7 +16,8 @@ export class NavbarComponent implements OnInit {
   public focus;
   public listTitles: any[];
   public location: Location;
-  user:any={}
+
+  user$: Observable<User> = this.userService.getUser(localStorage.getItem('userId')).pipe(map((data) => new User(data)))
 
   constructor(
     location: Location,  
@@ -26,7 +30,6 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit() {
     this.listTitles = ROUTES.filter(listTitle => listTitle);
-    this.user=this.userService.user
   }
   getTitle(){
     var titlee = this.location.prepareExternalUrl(this.location.path());
@@ -41,6 +44,9 @@ export class NavbarComponent implements OnInit {
     }
     return 'Dashboard';
   }
+
+  
+  
 
   logout() {
     this.userService.logout()

@@ -52,7 +52,7 @@ router.post("/register",uploadImg.single('file'),async (req, res) => {
     } = req.body;
 
     let image;
-    if (req.file)  image  = req.file.path;
+    if (req.file)  image  = req.file.filename;
 
 
 
@@ -145,8 +145,8 @@ router.post("/login", async (req, res) => {
     }
     // Validate if user exist in our database
     const user = await User.findOne({
-      email,
-      blocked: false
+      email
+      
     }).populate('role')
 
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -163,10 +163,13 @@ router.post("/login", async (req, res) => {
       // save user token
       user.token = token;
 
+      if (user.blocked){
+        res.status(400).json("user is blocked");
+      }
       // user
       res.status(200).json(user);
     }
-    res.status(400).send("Invalid Credentials");
+    res.status(400).json("Invalid Credentials");
   } catch (err) {
     console.log(err);
   }
@@ -174,9 +177,9 @@ router.post("/login", async (req, res) => {
 });
 
 
-router.get("/current", auth, async (req, res) => {
+router.get("/:userId", auth, async (req, res) => {
   try {
-    res.status(200).json(await User.findById(req.user.user_id))
+    res.status(200).json(await User.findById(req.params.userId))
   } catch (error) {
 
   }

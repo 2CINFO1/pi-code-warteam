@@ -1,27 +1,47 @@
-import { Component, OnInit } from '@angular/core';
+
+  import { Component, OnInit } from '@angular/core';
 import { LeaveRequestService } from 'src/app/core/services/leave-request.service';
 import { LeaveModel } from 'src/app/shared/model/congeModel';
 import Swal from 'sweetalert2';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-leave-list',
   templateUrl: './leave-list.component.html',
   styleUrls: ['./leave-list.component.css'],
 })
 export class LeaveListComponent implements OnInit {
-  leaves: LeaveModel[];
-  role = localStorage.getItem('role')
+  leaves: LeaveModel[] = []
+  role = localStorage.getItem('role');
+  leaveRequestService: any;
+  leave: LeaveModel;
 
-  constructor(private service: LeaveRequestService) {}
+  constructor(private service: LeaveRequestService,
+    private router: Router
+    ) {}
 
   ngOnInit(): void {
     this.getAllLeaves();
     console.log(this.role);
 
   }
+  delete(id ) {
+    console.log(id);
+
+    this.service.deleteLeave(id).subscribe((response: any) => {
+      this.leaves = []
+      this.getAllLeaves();
+
+      this.router.navigate(['/leave-list']);
+      console.log(id);
+    });
+      }
 
   getAllLeaves() {
     this.service.getAllLeave().subscribe((data) => {
-      this.leaves = data;
+      data.map(leave => {
+        leave = new LeaveModel(leave)
+        this.leaves.push(leave)
+      })
     });
   }
   approve(item: LeaveModel) {

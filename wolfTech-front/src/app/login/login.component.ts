@@ -13,6 +13,7 @@ export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   submitted = false;
   
+
   constructor(
     private formBuilder: FormBuilder,
     private userService: UserService,
@@ -27,7 +28,7 @@ export class LoginComponent implements OnInit {
   }
 
   get f() { return this.loginForm.controls; }
-
+  blocketUser;
   onSubmit() {
     this.submitted = true;
 
@@ -41,8 +42,10 @@ export class LoginComponent implements OnInit {
       this.loginForm.reset()
       localStorage.setItem('role', response.role.name)
       localStorage.setItem('token', response.token)
-      this.userService.user= new User(response);
+      localStorage.setItem('userId', response._id)
       this.router.navigate(['/dashboard'])
+    }, err => {
+      this.blocketUser = err.error      
     })
   }
 

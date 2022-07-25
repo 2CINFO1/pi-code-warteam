@@ -46,6 +46,7 @@ export class DemandesComponent implements OnInit {
     this.demandeService.changeAction(demande.id, {status}).subscribe((response: any) => {
       this.demandes = []
       this.readDemandes()
+      this.readStatsDemande()
     })
   }
 }
