@@ -42,7 +42,7 @@ export class LeaveRequestComponent implements OnInit {
       };
 
       this.leaveRequestService.createLeaveRequest(body).subscribe((response: any) => {
-        this.router.navigate(['/leave-list'])
+        this.router.navigate(['/leave-list']);
       });
 }
 
