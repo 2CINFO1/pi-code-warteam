@@ -27,6 +27,7 @@ import { ProjectDetailsComponent } from './components/project-details/project-de
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddDemandeComponent } from './components/add-demande/add-demande.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
+import { LeaveBalanceComponent } from './components/leave-balance/leave-balance.component';
 
 @NgModule({
   imports: [
@@ -56,7 +57,8 @@ import { TimelineComponent } from './components/timeline/timeline.component';
     ProjectDetailsComponent,
     AddDemandeComponent,
     InviteUserComponent,
-    TimelineComponent
+    TimelineComponent,
+    LeaveBalanceComponent
   ]
 })
 

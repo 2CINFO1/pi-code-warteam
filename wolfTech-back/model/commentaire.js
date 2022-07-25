@@ -17,7 +17,11 @@ demande: {
     type: mongoose.Schema.ObjectId,
     ref: 'demandes'
 },
-
+likes:[{
+    type: mongoose.Schema.ObjectId,
+    ref: 'user',
+    required: false
+}],
  },
  { timestamps: true }
 );

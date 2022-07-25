@@ -2,7 +2,6 @@ const mongoose = require("mongoose");
 
 const schema = new mongoose.Schema({
     
-    type  : {type : String , default:"like"},
     commentaire:{
         type: mongoose.Schema.ObjectId,
         ref: 'commentaires'
@@ -10,10 +9,8 @@ const schema = new mongoose.Schema({
 
     user:{
         type: mongoose.Schema.ObjectId,
-        ref: 'users'
-        
-    },
-    
+        ref: 'user'        
+    }
         
     
 },

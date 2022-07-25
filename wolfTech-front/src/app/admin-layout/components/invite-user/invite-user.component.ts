@@ -14,6 +14,7 @@ export class InviteUserComponent implements OnInit {
   registerForm: FormGroup;
   submitted = false;
   searchUser : string;
+  dyn : string;
   users : User[] = []
   constructor(
     private formBuilder: FormBuilder,
@@ -52,12 +53,29 @@ export class InviteUserComponent implements OnInit {
     })
   }
   displayfiltre(){
+    this.users=[];
     this.userService.display({ role: this.searchUser}).subscribe((response: any) => {
       response.user.map(user => {
         user = new User(user)
         this.users.push(user)
       })
+      this.affect();
     })
   }
-
+  affect(){
+    this.dyn=this.searchUser;
+  }
+  block(id:string){
+     this.userService.block({userId:id}).subscribe((Response:any) =>{
+       Response.user.map(user => {
+        user = new User(user)
+        
+        this.users.push(user)
+       })
+       console.log(this.users)
+      
+     })
+  }
 }
+
+
