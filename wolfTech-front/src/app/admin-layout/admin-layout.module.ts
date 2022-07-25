@@ -26,6 +26,7 @@ import { PdfViewerModule } from 'ng2-pdf-viewer';
 import { ProjectDetailsComponent } from './components/project-details/project-details.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { AddDemandeComponent } from './components/add-demande/add-demande.component';
+import { DragDropModule } from '@angular/cdk/drag-drop';
 
 @NgModule({
   imports: [
@@ -38,7 +39,8 @@ import { AddDemandeComponent } from './components/add-demande/add-demande.compon
     ReactiveFormsModule,
     FormsModule,
     PdfViewerModule,
-    NgSelectModule
+    NgSelectModule,
+    DragDropModule
   ],
   declarations: [
     DashboardComponent,

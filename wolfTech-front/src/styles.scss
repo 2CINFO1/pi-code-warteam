@@ -11,3 +11,10 @@
 .modal-backdrop.show {
     z-index: 0 !important;
 }
+
+.btn-close {
+    background: transparent;
+    border: none    ;
+}
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }

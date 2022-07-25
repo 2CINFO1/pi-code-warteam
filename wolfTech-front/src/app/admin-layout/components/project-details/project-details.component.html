@@ -59,6 +59,9 @@
                     </tr>
                   </tbody>
                 </table>
+                <div class="card-header border-0 d-flex justify-content-end"  style="margin-bottom: 8px;" *ngIf="role != 'consultant'">
+                  <button type="button" class="btn btn-outline-info" (click)="open(startProject);">Start Project</button>
+                </div>
               </div>
         </div>
     </div>
