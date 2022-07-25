@@ -14,6 +14,7 @@ export class ProjectsComponent implements OnInit {
   projects: Project[] = []
   role = localStorage.getItem('role')
   userId = localStorage.getItem('userId')
+  stats: any;
 
   constructor(
     private projectService: ProjectService,
@@ -21,6 +22,7 @@ export class ProjectsComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+    this.readStatsProjects()
     this.readProjects()
   }
 
@@ -47,4 +49,9 @@ export class ProjectsComponent implements OnInit {
     this.router.navigate(['project-details', projectId])
   }
 
+  readStatsProjects () {
+    this.projectService.readStats().subscribe((response: any) => {
+      this.stats = response
+    })
+  }
 }

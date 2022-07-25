@@ -8,8 +8,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Traffic</h5>
-                    <span class="h2 font-weight-bold mb-0">350,897</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Projects</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ stats?.projects }}</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-danger text-white rounded-circle shadow">
@@ -29,8 +29,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">New users</h5>
-                    <span class="h2 font-weight-bold mb-0">2,356</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Pending</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ stats?.pending }}</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-warning text-white rounded-circle shadow">
@@ -50,8 +50,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Sales</h5>
-                    <span class="h2 font-weight-bold mb-0">924</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0">progress</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ stats?.progress }}</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-yellow text-white rounded-circle shadow">
@@ -71,8 +71,8 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col">
-                    <h5 class="card-title text-uppercase text-muted mb-0">Performance</h5>
-                    <span class="h2 font-weight-bold mb-0">49,65%</span>
+                    <h5 class="card-title text-uppercase text-muted mb-0">Accepted</h5>
+                    <span class="h2 font-weight-bold mb-0">{{ stats?.enclosed }}</span>
                   </div>
                   <div class="col-auto">
                     <div class="icon icon-shape bg-info text-white rounded-circle shadow">
@@ -98,18 +98,16 @@
       <div class="col">
         <div class="card shadow">
           <div class="card-header border-0">
-            <h3 class="mb-0">Liste Des Projets</h3>
+            <h3 class="mb-0">Projects : </h3>
           </div>
           <div class="table-responsive">
             <table class="table align-items-center table-flush">
               <thead class="thead-light">
                 <tr>
                   <th scope="col">Nom Du Project</th>
-                  <th scope="col">Description</th>
                   <th scope="col">Date Debut</th>
                   <th scope="col">Date Fin</th>
                   <th scope="col">Status</th>
-                  <th scope="col">File</th>
                 </tr>
               </thead>
               <tbody>
@@ -125,14 +123,7 @@
                     </div>
                   </th>
                   <td>
-                    <span class="badge badge-dot mr-4">
-                        <i class="bg-warning"></i>{{ project.description }}
-                      </span>
-                  </td>
-                  <td>
-                    <span class="badge badge-dot mr-4">
-                      <i class="bg-warning"></i>{{ project.date_debut | date : 'MMMM d, y'}}
-                    </span>
+                      {{ project.date_debut | date : 'MMMM d, y'}}
                   </td>
                   
                   <td>
@@ -142,16 +133,15 @@
                     </div>
                   </td>
                   <td>
-                    <div class="badge badge-dot mr-4">
-                      <span class="mr-2">{{ project.etat}}</span>
-                      
-                    </div>
-                  </td>
-                  <td>
-                    <div class="badge badge-dot mr-4">
-                      <span class="mr-2">{{ project.file}}</span>
-                      
-                    </div>
+                    <span class="badge badge-dot mr-4" *ngIf="project.etat == 'pending'">
+                      <i class="bg-danger"></i> Pending
+                    </span>
+                    <span class="badge badge-dot mr-4" *ngIf="project.etat == 'progress'">
+                      <i class="bg-info"></i> Progress
+                    </span>
+                    <span class="badge badge-dot mr-4" *ngIf="project.etat == 'enclosed'">
+                      <i class="bg-success"></i> Enclosed
+                    </span>
                   </td>
                 </tr>
               </tbody>

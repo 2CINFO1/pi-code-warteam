@@ -86,7 +86,7 @@
                   <th scope="col">Project</th>
                   <th scope="col">Description</th>
                   <th scope="col">Status</th>
-                  <th scope="col">Users</th>
+                  <th scope="col">Clients</th>
                   <th scope="col"></th>
                 </tr>
               </thead>
@@ -117,10 +117,12 @@
                     </span>
                   </td>
                   <td>
-                    {{ demande.client?.first_name }} {{ demande?.client?.last_name }}
+                    <img src="{{ demande.client?.image }}" style="width: 35px; border-raduis: 50%"> &nbsp;&nbsp;{{ demande.client?.first_name }} {{ demande?.client?.last_name }}
                   </td>
                   <td class="text-right">
-                    <div ngbDropdown placement="bottom-right">
+                    <a class="btn btn-outline-info" href="javascript:void(0)" (click)="navigateToDemandeDetails(demande.id)"  *ngIf="demande.status == 'accepted'">Details</a>
+
+                    <div ngbDropdown placement="bottom-right" *ngIf="demande.status != 'accepted'">
                       <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
                         <i class="fas fa-ellipsis-v"></i>
                       </a>

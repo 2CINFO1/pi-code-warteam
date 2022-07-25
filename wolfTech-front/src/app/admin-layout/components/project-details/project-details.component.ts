@@ -128,9 +128,9 @@ export class ProjectDetailsComponent implements OnInit {
   }
 
   _startProject () {
-    this.modalService.dismissAll()
-    this.router.navigate(['/timeline-project', this.project.id])
-
-    //
+    this.projectService.changeEtatProject(this.projectId, 'progress').subscribe((response: any) => {
+      this.modalService.dismissAll()
+      this.router.navigate(['/timeline-project', this.project.id])
+    })
   }
 }

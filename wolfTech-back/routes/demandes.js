@@ -91,7 +91,7 @@ router.post('/actions/:_id', async (req, res) => {
                 Nom: demande.title,
                 Description: demande.description,
                 file: demande.file,
-                Etat: 'progress'
+                Etat: 'pending'
             }
             let projet = await Projet.create(projetData)
         }

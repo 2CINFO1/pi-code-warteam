@@ -27,4 +27,12 @@ export class ProjectService {
   addTaskToConsultant (taskId, body) {
     return this.httpClient.post(this.backEndApi + 'taches/affecter/' + taskId, body)
   }
+
+  changeEtatProject (projectId, etat) {
+    return this.httpClient.post(this.backEndApi + 'projets/action/' + projectId, {Etat: etat})
+  }
+
+  readStats () {
+    return this.httpClient.get(this.backEndApi + 'projets/stats')
+  }
 }

@@ -111,10 +111,33 @@ router.get('/archive/:_id', async (req, res, next) => {
     let projet = await Projet.findByIdAndUpdate(req.params, {isArchive : true})
     res.json({ success: true, msg: 'projet archived' , projet : projet });
 })
+
 router.get('/Desarchive/:_id', async (req, res, next) => {
     let projet = await Projet.findByIdAndUpdate(req.params, {isArchive : flase})
     res.json({ success: flase, msg: 'projet desarchived' , projet : projet });
 })
 
+router.post('/action/:_id', async (req, res) => {
+    try {
+        let _project = await Projet.findByIdAndUpdate(req.params, req.body);
+        res.status(200).json(_project)
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+})
+
+router.get('/stats', async (req, res) => {
+    try {
+        let data = {
+                'projects': await Projet.find().count(),
+                'pending': await Projet.find({Etat: 'pending'}).count(), 
+                'progress': await Projet.find({Etat: 'progress'}).count(),
+                'enclosed': await Projet.find({Etat: 'enclosed'}).count()
+        }
+        res.status(200).json(data)
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+})
 
 module.exports = router;
