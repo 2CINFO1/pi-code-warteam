@@ -28,6 +28,7 @@ import { NgSelectModule } from '@ng-select/ng-select';
 import { AddDemandeComponent } from './components/add-demande/add-demande.component';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { LeaveBalanceComponent } from './components/leave-balance/leave-balance.component';
+import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
 
 @NgModule({
   imports: [
@@ -58,7 +59,8 @@ import { LeaveBalanceComponent } from './components/leave-balance/leave-balance.
     AddDemandeComponent,
     InviteUserComponent,
     TimelineComponent,
-    LeaveBalanceComponent
+    LeaveBalanceComponent,
+    MyLeavesComponent
   ]
 })
 

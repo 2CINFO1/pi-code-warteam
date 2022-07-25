@@ -11,8 +11,8 @@
                           <option value="Sick Leave">Sick Leave</option>
                           <option value="Casual Leave">Casual Leave</option>
                           <option value="Maternity Leave"> Maternity Leave</option>
-                          <option value="Religious Holidays">Religious Holidays</option>
-                          <option value="Public Holidays">Public Holidays</option>
+                          <option value="Religious Holiday">Religious Holidays</option>
+                          <option value="Public Holiday">Public Holidays</option>
                       </select>
                             <div *ngIf="submitted && f.leave_subject.errors" class="invalid-feedback">
                                 <div *ngIf="f.leave_subject.errors.required">Leave type is required</div>
@@ -27,7 +27,7 @@
                         <input type="text" formControlName="leave_reason" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.leave_reason.errors }" />
                         <div *ngIf="submitted && f.leave_reason.errors" class="invalid-feedback">
                             <div *ngIf="f.leave_reason.errors.required">leave_reason is required</div>
-                            <div *ngIf="f.leave_reason.errors.leave_reason">Leave Reason is required</div>
+
                         </div>
                     </div>
                     <div class="form-row">

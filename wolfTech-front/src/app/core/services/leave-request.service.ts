@@ -56,4 +56,16 @@ export class LeaveRequestService {
       });
     }
 
+    readMyLeaveRequests () {
+      return this.httpClient.get(this.backEndApi + 'conges/my-leaves');
+    }
+
+    readStats() {
+      return this.httpClient.get(this.backEndApi + 'conges/stats');
+    }
+
+    readAllStats() {
+      return this.httpClient.get(this.backEndApi + 'conges/allstats');
+    }
+
 }

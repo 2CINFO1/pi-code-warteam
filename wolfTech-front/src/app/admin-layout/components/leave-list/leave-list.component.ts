@@ -10,10 +10,11 @@ import { Router } from '@angular/router';
   styleUrls: ['./leave-list.component.css'],
 })
 export class LeaveListComponent implements OnInit {
-  leaves: LeaveModel[] = []
+  leaves: LeaveModel[] = [];
   role = localStorage.getItem('role');
   leaveRequestService: any;
   leave: LeaveModel;
+  stats: any;
 
   constructor(private service: LeaveRequestService,
     private router: Router
@@ -21,20 +22,38 @@ export class LeaveListComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllLeaves();
-    console.log(this.role);
-
+    this.readAllStats()
   }
+
   delete(id ) {
-    console.log(id);
+
+    Swal.fire({
+      title: 'Are you sure?',
+      text: '',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Delete it!',
+    }).then((result) => {
+      console.log(id);
 
     this.service.deleteLeave(id).subscribe((response: any) => {
-      this.leaves = []
+      this.leaves = [];
       this.getAllLeaves();
 
       this.router.navigate(['/leave-list']);
       console.log(id);
-    });
-      }
+        });
+        Swal.fire('Success!', 'Leave has been Deleted.', 'success');
+
+      });
+    }
+
+
+
+
+
 
   getAllLeaves() {
     this.service.getAllLeave().subscribe((data) => {
@@ -59,7 +78,9 @@ export class LeaveListComponent implements OnInit {
         item.approved = true;
         item.denied = false;
         this.service.updateStatus(item).subscribe((data) => {
+          this.leaves = []
           this.getAllLeaves();
+          this.readAllStats()
         });
         Swal.fire('Success!', 'Leave has been Approved.', 'success');
       }
@@ -80,12 +101,17 @@ export class LeaveListComponent implements OnInit {
         item.approved = false;
         item.status = 'denied';
         this.service.updateStatus(item).subscribe((data) => {
+          this.leaves = []
           this.getAllLeaves();
+          this.readAllStats()
         });
         Swal.fire('Success!', 'Leave has been denied.', 'success');
       }
     });
   }
+
+
+
 
   onView(item: LeaveModel) {
     Swal.fire({
@@ -95,4 +121,14 @@ export class LeaveListComponent implements OnInit {
       footer: '',
     });
   }
+
+
+  readAllStats () {
+    this.service.readAllStats().subscribe((response: any) => {
+      this.stats = response;
+      console.log(this.stats);
+
+    });
+  }
+
 }
