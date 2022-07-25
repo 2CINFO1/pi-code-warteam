@@ -65,7 +65,17 @@ export class InviteUserComponent implements OnInit {
   affect(){
     this.dyn=this.searchUser;
   }
-  block(){
-    
+  block(id:string){
+     this.userService.block({userId:id}).subscribe((Response:any) =>{
+       Response.user.map(user => {
+        user = new User(user)
+        
+        this.users.push(user)
+       })
+       console.log(this.users)
+      
+     })
   }
 }
+
+

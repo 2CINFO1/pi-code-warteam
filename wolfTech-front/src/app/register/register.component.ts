@@ -23,20 +23,23 @@ export class RegisterComponent implements OnInit {
 
   ngOnInit() {
       this.registerForm = this.formBuilder.group({
-        first_name: ['', Validators.required],
-        last_name: ['', Validators.required],
-        email: ['', [Validators.required, Validators.email]],
-        password: ['', [Validators.required, Validators.minLength(6)]],
-        image: ['',[Validators.required]]
+        first_name: [],
+        last_name: [],
+        email: [],
+        password: [],
+        image: []
     })
   }
 
   get f() { return this.registerForm.controls; }
 
   onSubmit() {
+    
+
     this.submitted = true;
 
     if (this.registerForm.invalid) {
+      
         return;
     }
 
