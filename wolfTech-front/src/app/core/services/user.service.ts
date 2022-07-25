@@ -42,5 +42,8 @@ export class UserService {
   display(body){
     return this.httpClient.post(this.backEndApi + 'users/display', body)
   }
+  block(body){
+    return this.httpClient.post(this.backEndApi + 'users/blocked', body)
+  }
 
 }
