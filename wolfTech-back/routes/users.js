@@ -145,8 +145,8 @@ router.post("/login", async (req, res) => {
     }
     // Validate if user exist in our database
     const user = await User.findOne({
-      email,
-      blocked: false
+      email
+      
     }).populate('role')
 
     if (user && (await bcrypt.compare(password, user.password))) {
@@ -163,10 +163,13 @@ router.post("/login", async (req, res) => {
       // save user token
       user.token = token;
 
+      if (user.blocked){
+        res.status(400).json("user is blocked");
+      }
       // user
       res.status(200).json(user);
     }
-    res.status(400).send("Invalid Credentials");
+    res.status(400).json("Invalid Credentials");
   } catch (err) {
     console.log(err);
   }
