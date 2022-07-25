@@ -41,7 +41,8 @@ router.post('/add', async (req, res) => {
             Nom: req.body.Nom,
             Description: req.body.Description,
             Date_Debut: req.body.Date_Debut ?? '',
-            Date_Fin: req.body.Date_Fin ?? ''
+            Date_Fin: req.body.Date_Fin ?? '',
+            Priorite: req.body.Priorite ?? ''
         });
         projet.Taches.push(T)
         projet.save()
@@ -58,9 +59,7 @@ router.post('/affecter/:_id', async (req, res) => {
         let userId = req.body.userId
         let tache = await Tache.findOne({ User: userId, Etat: 'En cours' })
 
-        if (tache) {
-            res.status('400').json("User have Tasks")
-        } else {
+       {
             let affectTache = await Tache.findById(req.params)
             affectTache.User = userId;
             affectTache.save();
