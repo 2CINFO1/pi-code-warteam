@@ -27,4 +27,7 @@ export class ProjectService {
   addTaskToConsultant (taskId, body) {
     return this.httpClient.post(this.backEndApi + 'taches/affecter/' + taskId, body)
   }
+  deleteTask (taskId, body) {
+    return this.httpClient.post(this.backEndApi + 'taches/delete/' + taskId, body)
+  }
 }

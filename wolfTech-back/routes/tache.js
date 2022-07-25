@@ -25,7 +25,7 @@ router.post('/update/:_id', async (req, res) => {
     tache.save()
     res.json(tache)
 })
-router.delete('/delete/:_id', async (req, res) => {
+router.post('/delete/:_id', async (req, res) => {
     console.log(req.params);
     await Tache.findByIdAndDelete(req.params)
     res.json('delete success')
