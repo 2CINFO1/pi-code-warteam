@@ -142,7 +142,14 @@ router.post("/updateStatus", async(req, res) => {
                     "Your " + conge.leave_subject + " has been approved." +
                     "<br>" +
                     "Sincerely",
-            }
+            };
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
         } else if (conge.denied) {
             // console.log(conge);
             var mailOptions = {
