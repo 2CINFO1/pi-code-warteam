@@ -82,7 +82,7 @@ router.post('/add', auth,[
     // upload.single('file'), function (req, res) { }
     let user = await User.findOne({_id: req.user.user_id})
     let rep = await Reponse.findById(req.body.Reponse)
-    var c = new Commentaire({
+    var c = new commentaire({
         textC: req.body.TextC,
         Reponse: rep,
         user,

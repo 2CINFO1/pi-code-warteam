@@ -166,11 +166,13 @@ export class DemandeDetailsComponent implements OnInit {
   reactionComment (comment: Comment) {
     if (this.existUser(comment)) {
       this.commentService.createReactionDislike(comment.id).subscribe((response: any)  => {
+        this.comments = []
         comment = new Comment(response)
         this.readCommentsDemande()
       })
     } else {
       this.commentService.createReactionLike(comment.id).subscribe((response: any)  => {
+        this.comments = []
         comment = new Comment(response)
         this.readCommentsDemande()
       })

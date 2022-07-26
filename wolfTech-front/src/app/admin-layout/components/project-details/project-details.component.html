@@ -68,9 +68,9 @@
                   <button type="button" class="btn btn-outline-info" (click)="open(startProject);"  *ngIf="role != 'consultant' && project?.etat == 'pending'">Start Project</button>
                   <button type="button" class="btn btn-outline-info" [routerLink]="['/timeline-project', project?.id]" *ngIf="project?.etat == 'progress'">Time Line : Project - {{ project.nom }}</button>
                 </div>
-        <div class="card-header border-0 d-flex justify-content-end" style="margin-bottom: 8px;">
-          <button type="button" class="btn btn-outline-info" (click)="open(startProject);">Start Project</button>
-        </div>
+              <div class="card-header border-0 d-flex justify-content-end" style="margin-bottom: 8px;">
+                <button type="button" class="btn btn-outline-info" (click)="open(startProject);">Start Project</button>
+              </div>
       </div>
     </div>
   </div>
