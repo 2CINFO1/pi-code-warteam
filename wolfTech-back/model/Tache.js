@@ -8,7 +8,7 @@ Description   : String,
 Date_Debut : {type: Date, required: false},
 Date_Fin : {type: Date, required: false},
 Priorite : {type: String, required: false},
-Etat : {type: String, required: true, default: 'En cours' },
+Etat : {type: String, required: true, default: 'pending' },
 User:{
     type: mongoose.Schema.ObjectId,
     ref: 'user',

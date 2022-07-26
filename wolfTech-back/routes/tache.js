@@ -57,7 +57,7 @@ router.post('/affecter/:_id', async (req, res) => {
     try {
 
         let userId = req.body.userId
-        let tache = await Tache.findOne({ User: userId, Etat: 'En cours' })
+        let tache = await Tache.findOne({ User: userId, Etat: 'pending' })
 
        {
             let affectTache = await Tache.findById(req.params)

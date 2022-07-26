@@ -33,8 +33,9 @@ export class TimelineComponent implements OnInit {
   readProject () {
     this.projectService.readProject(this.projectId).subscribe((response: any) => {
       this.project = new Project(response)
-      this.todo = this.project.tasks.filter((task: Task) => task.etat == 'En cours')
-      this.done = this.project.tasks.filter((task: Task) => task.etat == 'ytes')  
+      this.todo = this.project.tasks.filter((task: Task) => task.etat == 'pending')
+      this.doing = this.project.tasks.filter((task: Task) => task.etat == 'progress')
+      this.done = this.project.tasks.filter((task: Task) => task.etat == 'done')
     })
   }
 
