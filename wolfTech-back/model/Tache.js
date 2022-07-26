@@ -7,6 +7,7 @@ Nom : String,
 Description   : String,
 Date_Debut : {type: Date, required: false},
 Date_Fin : {type: Date, required: false},
+Priorite : {type: String, required: false},
 Etat : {type: String, required: true, default: 'En cours' },
 User:{
     type: mongoose.Schema.ObjectId,

@@ -32,6 +32,7 @@ export class ProjectDetailsComponent implements OnInit {
     private modalService: NgbModal,
     private formBuilder: FormBuilder,
     private userService: UserService
+    
   ) { }
   
   ngOnInit(): void {
@@ -133,4 +134,11 @@ export class ProjectDetailsComponent implements OnInit {
       this.router.navigate(['/timeline-project', this.project.id])
     })
   }
+  deletetask(task) {
+      this.projectService.deleteTask(task.id, {}).subscribe((response: any) => {
+        this.projectDetails(this.projectId)
+        
+      })
+    }
+  
 }

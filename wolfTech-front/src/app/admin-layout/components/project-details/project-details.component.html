@@ -68,47 +68,58 @@
                   <button type="button" class="btn btn-outline-info" (click)="open(startProject);"  *ngIf="role != 'consultant' && project?.etat == 'pending'">Start Project</button>
                   <button type="button" class="btn btn-outline-info" [routerLink]="['/timeline-project', project?.id]" *ngIf="project?.etat == 'progress'">Time Line : Project - {{ project.nom }}</button>
                 </div>
-              </div>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <div class="card-header border-0 d-flex justify-content-end" style="margin-bottom: 8px;">
+          <button type="button" class="btn btn-outline-info" (click)="open(startProject);">Start Project</button>
         </div>
+      </div>
     </div>
+  </div>
 </div>
 
 <!-- MODAL Add Task -->
 <ng-template #addTaskModal let-modal>
-    <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Add Task : </h4>
-      <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="taskForm" (ngSubmit)="addTask()">
-        <div class="form-group">
-            <label>Name</label>
-            <input type="text" formControlName="nom" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
-            <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
-                <div *ngIf="f.nom.errors.required">Name is required</div>
-            </div>
+  <div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Add Task : </h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss('Cross click')">X</button>
+  </div>
+  <div class="modal-body">
+    <form [formGroup]="taskForm" (ngSubmit)="addTask()">
+      <div class="form-group">
+        <label>Name</label>
+        <input type="text" formControlName="nom" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.nom.errors }" />
+        <div *ngIf="submitted && f.nom.errors" class="invalid-feedback">
+          <div *ngIf="f.nom.errors.required">Name is required</div>
         </div>
-        <div class="form-group">
-            <label>Description</label>
-            <input type="text" formControlName="description" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
-            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
-                <div *ngIf="f.description.errors.required">Description is required</div>
-            </div>
+      </div>
+      <div class="form-group">
+        <label>Description</label>
+        <input type="text" formControlName="description" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.description.errors }" />
+        <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+          <div *ngIf="f.description.errors.required">Description is required</div>
         </div>
-        <div class="form-group">
-          <label>Priorite</label>
-          <select formControlName="priorit" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.priorite.errors }" >
-            
-            <option value="low">low</option>
-            <option value="medium">medium</option>
-            <option value="hight">high</option>
-          </select>
-              
+      </div>
+      <div class="form-group">
+        <label>Priorite</label>
+        <select formControlName="priorite" class="form-control"
+          [ngClass]="{ 'is-invalid': submitted && f.priorite.errors }">
+
+          <option value="LOW">LOW</option>
+          <option value="MEDUIM">MEDUIM</option>
+          <option value="HIGH">HIGH</option>
+        </select>
+
         <div class="modal-footer">
-            <button type="submit" class="btn btn-outline-dark">Save</button>
-        </div></div>
-      </form>
-    </div>
+          <button type="submit" class="btn btn-outline-dark">Save</button>
+        </div>
+      </div>
+    </form>
+  </div>
 </ng-template>
 
 <!-- MODAL Affect Consultant -->

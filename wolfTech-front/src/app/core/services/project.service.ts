@@ -35,4 +35,8 @@ export class ProjectService {
   readStats () {
     return this.httpClient.get(this.backEndApi + 'projets/stats')
   }
+  
+  deleteTask (taskId, body) {
+    return this.httpClient.post(this.backEndApi + 'taches/delete/' + taskId, body)
+  }
 }
