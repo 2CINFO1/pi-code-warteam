@@ -39,13 +39,13 @@
                   <tbody>
                     <tr *ngFor="let task of project?.tasks">
                       <td>
-                        {{ task.id.slice(0, 4) }}......{{ task.id.slice(task.id.length -4, task.id.length)}}
+                        <b>{{ task.id.slice(0, 4) }}......{{ task.id.slice(task.id.length -4, task.id.length)}}</b>
                       </td>
                       <td>
                         {{ task.nom }}
                       </td>
                       <td>
-                        <img src="{{ task.consultant?.image }}" style="width: 35px;  height: 35px;border-radius: 50%;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/219/219983.png'"> &nbsp; &nbsp;{{ task.consultant?.first_name }} {{ task.consultant?.last_name }}
+                        <img src="{{ task.consultant?.image }}" *ngIf="task.consultant" style="width: 35px;  height: 35px;border-radius: 50%;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/219/219983.png'"> &nbsp; &nbsp;{{ task.consultant?.first_name }} {{ task.consultant?.last_name }}
                       </td>
                       <td>{{ task.created_at | date:'MMM d, y' }}</td>
                       <td>{{ task.priorite }}</td>

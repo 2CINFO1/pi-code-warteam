@@ -117,7 +117,7 @@
                     </span>
                   </td>
                   <td>
-                    <img src="{{ demande.client?.image }}" style="width: 35px; border-raduis: 50%"> &nbsp;&nbsp;{{ demande.client?.first_name }} {{ demande?.client?.last_name }}
+                    <img src="{{ demande.client?.image }}" onerror="this.src='https://cdn-icons-png.flaticon.com/512/219/219983.png'" style="width: 35px; border-raduis: 50%"> &nbsp;&nbsp;{{ demande.client?.first_name }} {{ demande?.client?.last_name }}
                   </td>
                   <td class="text-right">
                     <a class="btn btn-outline-info" href="javascript:void(0)" (click)="navigateToDemandeDetails(demande.id)"  *ngIf="demande.status == 'accepted'">Details</a>
@@ -136,6 +136,8 @@
                 </tr>
               </tbody>
             </table>
+            <h4 class="d-flex justify-content-center" style="padding-top: 16px;" *ngIf="!demandes.length">No data ...</h4>
+
           </div>
           <div class="card-footer py-4">
             <nav aria-label="...">

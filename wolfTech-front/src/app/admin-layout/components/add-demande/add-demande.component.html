@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="card shadow" *ngIf="createEventBlock">
             <div class="container-fluid">
-                <div class="container d-flex justify-content-between" style="margin: 16px;">
+                <div class="d-flex justify-content-between" style="margin: 16px;">
                     <h3>Create Demande</h3>
                     <h3 style="cursor: pointer;" class="btn btn-outline-warning" (click)="createEventBlock = false">< back</h3>
                 </div>
@@ -35,7 +35,7 @@
         </div>
 
         <div class="card shadow" *ngIf="!createEventBlock">
-            <div class="container d-flex justify-content-between" style="margin: 16px;">
+            <div class="d-flex justify-content-between" style="margin: 16px;">
                 <h2>Demandes : </h2>
                 <button type="button" class="btn btn-outline-success" (click)="createEventBlock = true">Add Demande</button>
             </div>
@@ -50,11 +50,6 @@
                     </tr>
                   </thead>
                   <tbody>
-                    <tr *ngIf="!demandes.length">
-                        <th></th>
-                        <th col="5">No data ...</th>
-                        <th></th>
-                    </tr>
                     <tr *ngFor="let demande of demandes">
                       <th scope="row">
                         <div class="media align-items-center">
@@ -94,6 +89,8 @@
                     </tr>
                   </tbody>
                 </table>
+                <h4 class="d-flex justify-content-center" style="padding-top: 16px;" *ngIf="!demandes.length">No data ...</h4>
+
               </div>
         </div>
     </div>
