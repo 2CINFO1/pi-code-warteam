@@ -115,10 +115,14 @@ export class LeaveListComponent implements OnInit {
 
   onView(item: LeaveModel) {
     Swal.fire({
-      icon: 'info',
-      title: 'Leave detail',
-      text: 'user ' + item.user.first_name,
-      footer: '',
+
+      title: 'User detail',
+      imageUrl: item.user.image,
+      imageWidth: 90,
+      imageHeight: 90,
+      html: '<p align="left"> User: ' + item.user.first_name + ' ' + item.user.last_name + '</p>' + '<br>'
+      + '<p align="left"> Email: ' + item.user.email + '</p>'+ '<br>',
+
     });
   }
 
