@@ -29,6 +29,8 @@ import { AddDemandeComponent } from './components/add-demande/add-demande.compon
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { TimelineComponent } from './components/timeline/timeline.component';
 import { LeaveBalanceComponent } from './components/leave-balance/leave-balance.component';
+import { MyLeavesComponent } from './components/my-leaves/my-leaves.component';
+import { PrimeComponent } from './components/prime/prime.component';
 
 @NgModule({
   imports: [
@@ -60,7 +62,9 @@ import { LeaveBalanceComponent } from './components/leave-balance/leave-balance.
     AddDemandeComponent,
     InviteUserComponent,
     TimelineComponent,
-    LeaveBalanceComponent
+    LeaveBalanceComponent,
+    MyLeavesComponent,
+    PrimeComponent
   ]
 })
 

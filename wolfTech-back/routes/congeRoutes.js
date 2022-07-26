@@ -47,7 +47,7 @@ router.post('/add', auth, async(req, res, next) => {
     if (conge.status == 'pending') {
         var mailOptions = {
             from: "wolf.tech77777@gmail.com",
-            to: "ferjani.naoufel22@gmail.com",
+            to: req.user.email,
             subject: conge.leave_subject + " request",
 
             text: "Dear",
@@ -93,6 +93,30 @@ router.post('/update/:_id', async(req, res) => {
 router.post('/status/:_id', async(req, res) => {
     try {
         let conge = await Conge.findOneAndUpdate(req.params, { status: req.body.status }).exec()
+            // if (conge.status == 'approved') {
+            //     console.log('test');
+            //     var mailOptions = {
+            //         from: "wolf.tech77777@gmail.com",
+            //         to: conge.user.email,
+            //         subject: conge.leave_subject + " request",
+
+        //         text: "Dear",
+        //         html: "I'm writing to ask for " + conge.leave_subject + " in advance of my entitlements." +
+        //             "<br>" +
+
+        //             "I'd like to take my leave between the following dates " + conge.start_date + " and " +
+        //             conge.end_date + ".<br>" +
+        //             "Sincerely",
+        //     };
+
+        //     transporter.sendMail(mailOptions, function(error, info) {
+        //         if (error) {
+        //             console.log(error);
+        //         } else {
+        //             console.log('Email sent: ' + info.response);
+        //         }
+        //     });
+        // }
         res.json(conge)
     } catch (error) {
         res.json(error.message)
@@ -100,16 +124,97 @@ router.post('/status/:_id', async(req, res) => {
 })
 router.post("/updateStatus", async(req, res) => {
     try {
-        const conge = await Conge.findOne({ _id: req.body._id });
-        console.log(req.body)
+        const conge = await Conge.findOne({ _id: req.body.id }).populate('user');
         conge.approved = req.body.approved
         conge.denied = req.body.denied
         conge.status = req.body.status
         conge.save();
+
+        if (conge.approved) {
+            // console.log(conge);
+            var mailOptions = {
+                from: "wolf.tech77777@gmail.com",
+                to: conge.user.email,
+                subject: conge.leave_subject + " request",
+
+                text: "Dear Mr ",
+                html: "Dear Mr " + conge.user.first_name + " " + conge.user.last_name + "<br>" +
+                    "Your " + conge.leave_subject + " has been approved." +
+                    "<br>" +
+                    "Sincerely",
+            }
+        } else if (conge.denied) {
+            // console.log(conge);
+            var mailOptions = {
+                from: "wolf.tech77777@gmail.com",
+                to: conge.user.email,
+                subject: conge.leave_subject + " request",
+
+                text: "Dear Mr " + conge.user.first_name,
+                html: "Dear Mr " + conge.user.first_name + " " + conge.user.last_name + "<br>" +
+                    "Your " + conge.leave_subject + " has been rejected." +
+                    "<br>" +
+                    "Sincerely",
+            };
+
+            transporter.sendMail(mailOptions, function(error, info) {
+                if (error) {
+                    console.log(error);
+                } else {
+                    console.log('Email sent: ' + info.response);
+                }
+            });
+        }
+
         res.json(conge)
 
     } catch (error) {
 
+    }
+})
+
+router.get('/my-leaves', auth, async(req, res) => {
+    try {
+        let conges = await Conge.find({ user: req.user.user_id }).populate('user');
+        res.status(200).json(conges)
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+})
+
+router.get('/stats', auth, async(req, res) => {
+    try {
+        let totalConges = await user.findById(req.user.user_id)
+        let dateUser = totalConges.created_at
+        let currentDate = new Date()
+        let diff = currentDate.getTime() - dateUser.getTime()
+        let days = Math.ceil(diff / (1000 * 3600 * 24));
+        res.status(200).json({
+            'conges': await Conge.find({ user: req.user.user_id }).count(),
+            'total': Math.round((days / 30) * 2),
+            'start': totalConges.created_at,
+            'pending': await Conge.find({ user: req.user.user_id, status: 'pending' }).count(),
+        })
+    } catch (error) {
+        res.status(400).json(error.message)
+    }
+})
+
+router.get('/allstats', auth, async(req, res) => {
+    try {
+        let totalConges = await user.findById(req.user.user_id)
+        let dateUser = totalConges.created_at
+        let currentDate = new Date()
+        let diff = currentDate.getTime() - dateUser.getTime()
+        let days = Math.ceil(diff / (1000 * 3600 * 24));
+        res.status(200).json({
+            'conges': await Conge.find().count(),
+            'pending': await Conge.find({ status: 'pending' }).count(),
+            'approved': await Conge.find({ status: 'approved' }).count(),
+            'denied': await Conge.find({ status: 'denied' }).count(),
+        })
+    } catch (error) {
+        res.status(400).json(error.message)
     }
 })
 
