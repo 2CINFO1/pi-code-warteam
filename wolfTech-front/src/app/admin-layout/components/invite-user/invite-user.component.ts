@@ -49,6 +49,7 @@ export class InviteUserComponent implements OnInit {
 
     this.userService.register(body).subscribe((response: any) => {
       this.registerForm.reset()
+      this.submitted = false;
       this.router.navigate(['/invite-user'])
     })
   }

@@ -21,7 +21,7 @@
           <ng-container *ngIf="(user$ | async) as user">
             <div class="media align-items-center">
               <span class="avatar avatar-sm rounded-circle">
-                <img alt="Image placeholder" src="{{user.image}}">
+                <img alt="Image placeholder" src="{{user.image}}" style="height: 38px;">
               </span>
               <div class="media-body ml-2 d-none d-lg-block">
                 <span class="mb-0 text-sm  font-weight-bold">{{user.first_name + ' ' +user.last_name}}</span>
