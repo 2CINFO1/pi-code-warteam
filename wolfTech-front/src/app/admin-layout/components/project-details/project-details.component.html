@@ -45,7 +45,7 @@
                         {{ task.nom }}
                       </td>
                       <td>
-                        <img src="{{ task.consultant?.image }}" style="width: 35px; border-raduis: 50% !important"> &nbsp; &nbsp;{{ task.consultant?.first_name }} {{ task.consultant?.last_name }}
+                        <img src="{{ task.consultant?.image }}" style="width: 35px;  height: 35px;border-radius: 50%;" onerror="this.src='https://cdn-icons-png.flaticon.com/512/219/219983.png'"> &nbsp; &nbsp;{{ task.consultant?.first_name }} {{ task.consultant?.last_name }}
                       </td>
                       <td>{{ task.created_at | date:'MMM d, y' }}</td>
                       <td>{{ task.priorite }}</td>
@@ -126,7 +126,7 @@
             <label>Name</label>
             <ng-select formControlName="consultant" class="consultant">
               <ng-option *ngFor="let consultant of consultants" [value]="consultant.id">
-                <img src="{{ consultant.image }}" style="width: 35px; border-raduis: 50%"> &nbsp;&nbsp;
+                <img src="{{ consultant.image }}" style="width: 35px; height: 35px;  border-radius: 50%"> &nbsp;&nbsp;
                 {{consultant.first_name}} {{ consultant.last_name }}
               </ng-option>
             </ng-select>

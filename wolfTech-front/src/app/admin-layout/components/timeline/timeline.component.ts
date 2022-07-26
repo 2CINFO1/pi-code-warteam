@@ -66,7 +66,7 @@ export class TimelineComponent implements OnInit {
         this.projectService.changeEtatProject(this.projectId, 'enclosed').subscribe((response: any) => {
           
         })
-        Swal.fire('Success!', 'Leave has been Approved.', 'success');
+        Swal.fire('Success!', 'Project has been Closed.', 'success');
         this.router.navigate(['/projects'])
       }
     });
