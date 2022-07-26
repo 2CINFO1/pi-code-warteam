@@ -45,5 +45,7 @@ export class UserService {
   block(body){
     return this.httpClient.post(this.backEndApi + 'users/blocked', body)
   }
-
+  updateUser(body,userId){
+    return this.httpClient.post(this.backEndApi + 'users/update/'+ userId, body)
+  }
 }
