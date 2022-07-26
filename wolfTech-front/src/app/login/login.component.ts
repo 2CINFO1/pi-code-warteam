@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 import { User } from '../core/models/user';
 import { UserService } from '../core/services/user.service';
 
@@ -45,7 +46,16 @@ export class LoginComponent implements OnInit {
       localStorage.setItem('userId', response._id)
       this.router.navigate(['/dashboard'])
     }, err => {
-      this.blocketUser = err.error      
+      Swal.fire({
+        title: err.error,
+        text: '',
+        icon: 'error',
+        confirmButtonColor: '#FF0000'
+      }).then((result) => {
+        if (result.value) {
+      
+        }
+      })
     })
   }
 
