@@ -1,55 +1,73 @@
 <div class="header bg-gradient-danger pb-8 pt-5 pt-md-8">
-  <div class="container-fluid">
-    <div class="card shadow card-body">
-      <h5 class="card-title text-center">{{ project?.nom }}</h5>
-      <p class="card-text">{{ project?.description }}</p>
-      <pdf-viewer [src]="project?.file" [rotation]="0" [original-size]="false" [show-all]="true" [fit-to-page]="false"
-        [zoom]="1" [zoom-scale]="'page-width'" [stick-to-page]="false" [render-text]="true"
-        [external-link-target]="'blank'" [autoresize]="true" [show-borders]="false" style="width: 100%; height: 600px;">
-      </pdf-viewer>
-    </div>
-    <div class="mt-4 card shadow">
-      <div class="card-header border-0 d-flex align-items-center justify-content-between">
-        <h3 class="mb-0">Tasks List - Project : {{ project?.nom }}</h3>
-        <button type="button" class="btn btn-outline-success" (click)="open(addTaskModal)"
-          *ngIf="role == 'manager' || role =='ceo'">+ Add Task</button>
-      </div>
-      <div class="table-responsive">
-        <table class="table align-items-center table-flush">
-          <thead class="thead-light">
-            <tr>
-              <th scope="col">ID Task </th>
-              <th scope="col">Nom</th>
-              <th scope="col">Consultant</th>
-              <th scope="col">Date</th>
-              <th scope="col">Priorite</th>
-              <th scope="col"></th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let task of project?.tasks">
-              <td>
-                {{ task.id }}
-              </td>
-              <td>
-                {{ task.nom }}
-              </td>
-              <td>
-                {{ task.consultant?.first_name }} {{ task.consultant?.last_name }}
-              </td>
-              <td>{{ task.created_at | date:'medium' }}</td>
-              <td>{{ task.priorite }}</td>
-              <td class="text-right">
-                <div ngbDropdown placement="bottom-right" *ngIf="role != 'consultant'">
-                  <a class="btn btn-sm btn-icon-only text-light" ngbDropdownToggle>
-                    <i class="fas fa-ellipsis-v"></i>
-                  </a>
-                  <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
-                  
-                    <a class="dropdown-item" href="javascript:void(0)" (click)="open(affectTask);"
-                      (click)="saveTask(task)">Affecter</a>
-                    <a class="dropdown-item" href="javascript:void(0)"(click)="deletetask(task)">Delete</a>
-                  </div>
+    <div class="container-fluid">
+        <div class="card shadow card-body">
+            <h1 class="card-title text-center">Project Name : {{ project?.nom }}</h1>
+            <p class="card-text"><b>Description : </b>{{ project?.description }}</p>
+            <pdf-viewer
+                [src]="project?.file"
+                [rotation]="0"
+                [original-size]="false"
+                [show-all]="true"
+                [fit-to-page]="false"
+                [zoom]="1"
+                [zoom-scale]="'page-width'"
+                [stick-to-page]="false"
+                [render-text]="true"
+                [external-link-target]="'blank'"
+                [autoresize]="true"
+                [show-borders]="false"
+                style="width: 100%; height: 600px;"
+            ></pdf-viewer>
+        </div>
+        <div class="mt-4 card shadow">
+            <div class="card-header border-0 d-flex align-items-center justify-content-between">
+                <h3 class="mb-0">Tasks List - Project : {{ project?.nom }}</h3>
+                <button type="button" class="btn btn-outline-success" (click)="open(addTaskModal)" *ngIf="(role == 'manager' || role =='ceo') && project?.etat != 'enclosed'">+ Add Task</button>
+              </div>
+              <div class="table-responsive">
+                <table class="table align-items-center table-flush">
+                  <thead class="thead-light">
+                    <tr>
+                      <th scope="col">ID Task </th>
+                      <th scope="col">Nom</th>
+                      <th scope="col">Consultant</th>
+                      <th scope="col">Date</th>
+                      <th scope="col">Priorite</th>
+                      <th scope="col" *ngIf="project?.etat != 'enclosed'">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr *ngFor="let task of project?.tasks">
+                      <td>
+                        {{ task.id.slice(0, 4) }}......{{ task.id.slice(task.id.length -4, task.id.length)}}
+                      </td>
+                      <td>
+                        {{ task.nom }}
+                      </td>
+                      <td>
+                        <img src="{{ task.consultant?.image }}" style="width: 35px; border-raduis: 50%">{{ task.consultant?.first_name }} {{ task.consultant?.last_name }}
+                      </td>
+                      <td>{{ task.created_at | date:'MMM d, y' }}</td>
+                      <td>{{ task.priorite }}</td>
+                      <td class="text-right" *ngIf="project?.etat != 'enclosed'">
+                        <div ngbDropdown placement="bottom-right" *ngIf="role != 'consultant'">
+                          <a class="btn btn-sm btn-icon-only text-light"  ngbDropdownToggle>
+                            <i class="fas fa-ellipsis-v"></i>
+                          </a>
+                          <div ngbDropdownMenu class=" dropdown-menu-right dropdown-menu-arrow">
+                            
+                              <a class="dropdown-item" href="javascript:void(0)" (click)="open(affectTask);"
+                              (click)="saveTask(task)">Affecter</a>
+                            <a class="dropdown-item" href="javascript:void(0)"(click)="deletetask(task)">Delete</a>
+                          </div>
+                        </div>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+                <div class="card-header border-0 d-flex justify-content-end"  style="margin-bottom: 8px;" *ngIf="project?.etat != 'enclosed'">
+                  <button type="button" class="btn btn-outline-info" (click)="open(startProject);"  *ngIf="role != 'consultant' && project?.etat == 'pending'">Start Project</button>
+                  <button type="button" class="btn btn-outline-info" [routerLink]="['/timeline-project', project?.id]" *ngIf="project?.etat == 'progress'">Time Line : Project - {{ project.nom }}</button>
                 </div>
               </td>
             </tr>

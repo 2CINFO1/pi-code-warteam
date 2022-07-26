@@ -16,3 +16,16 @@
     background: transparent;
     border: none    ;
 }
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.consultant.ng-select.ng-select-single .ng-select-container {
+    height: 50px;
+}
+
+
+.invalid-feedback { 
+    font-size: 14px !important;
+    padding: 10px !important; 
+}
